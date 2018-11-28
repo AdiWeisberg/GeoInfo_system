@@ -4,84 +4,108 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class _layer implements GIS_layer {
-	private  ArrayList<GIS_element> dataPoint;
-	private ArrayList<Meta_data> infoArr;
+import Geom.Geom_element;
 
+public class _layer implements GIS_layer {
+	
+	private ArrayList<GIS_element> layer;
+	private int name;
+
+	
 	public _layer() {
-		dataPoint = new ArrayList();
-		infoArr = new ArrayList();
+		layer = new ArrayList<GIS_element>();  // 0 -> Point3D , 1 -> Info of the point
+		this.name=0;
 	}
+	
 	@Override
 	public boolean add(GIS_element GPSdata) {
-		boolean flg=false;
-		 flg=this.add(GPSdata);
-		 infoArr.add(GPSdata.getData());
-		 return flg;
+		return layer.add((GpsData) GPSdata);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_element> arg0) {
-		boolean flg=false;
-		Iterator<GIS_element> it = dataPoint.iterator();
-		while(it.hasNext()) {
-			flg=false;
-			if(this.add(it.next()))flg=true;
-		}
-		return flg;
+		return layer.addAll((Collection<? extends GpsData>) arg0);
 	}
 
 	@Override
 	public void clear() {
-		dataPoint.clear();
+		layer.clear();
 		return;
 	}
-	
+
 	@Override
 	public boolean contains(Object o) {
-		return dataPoint.contains(o);
+		return layer.contains(o);
 	}
-	
+
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return dataPoint.containsAll(c);
+		return layer.containsAll(c);
 	}
-	
+
 	@Override
 	public boolean isEmpty() {
-		
-		return dataPoint.isEmpty();
+
+		return layer.isEmpty();
 	}
 	@Override
 	public Iterator<GIS_element> iterator() {
-		return dataPoint.iterator();
+		return layer.iterator();
 	}
 	@Override
 	public boolean remove(Object o) {
-		return dataPoint.remove(o);
+		return layer.remove(o);
 	}
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return dataPoint.removeAll(c);
+		return layer.removeAll(c);
 	}
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		return dataPoint.retainAll(c);
+		return layer.retainAll(c);
 	}
 	@Override
 	public int size() {
-		return dataPoint.size();
+		return layer.size();
 	}
 	@Override
 	public Object[] toArray() {
-		return dataPoint.toArray();
+		return layer.toArray();
 	}
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return dataPoint.toArray(a);
+		return layer.toArray(a);
 	}
 	@Override
 	public ArrayList<Meta_data> get_Meta_data() {
-		return this.infoArr;
+		ArrayList<Meta_data> ans = new ArrayList<Meta_data>();
+		for(int i=0; i<layer.size(); i++) {
+			ans.add(layer.get(i).getData());
+		}
+		return ans;
+	}
+	@Override
+	public int getName() {
+		return this.name;
+	}
+	@Override
+	public ArrayList<Geom_element> getItems() {
+		ArrayList<Geom_element> ans = new ArrayList<Geom_element>();
+		for(int i=0; i<layer.size(); i++) {
+			ans.add(layer.get(i).getGeom());
+		}
+		return ans;
+	}
+	@Override
+	public void setName(int i) {
+		this.name = i;
+	}
+	
+	@Override
+	public ArrayList<GIS_element> getLayer() {
+		return layer;
+	}
+	public GIS_element get_gpsData(int i) {
+		return layer.get(i);
 	}
 }

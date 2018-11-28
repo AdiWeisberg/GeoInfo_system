@@ -10,14 +10,25 @@ public class info implements Meta_data{
 	private long UTC;
 	private String SSID;
 	private String type;
+	private String BSSID;
+	private String capabillities;
+	
 
-	public info(String UTC,String SSID, String type) throws ParseException {
+	public info(String SSID,String BSSID,String capabillities,String UTC, String type){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		Date date = sdf.parse(UTC);
 		this.UTC = date.getTime();
 		this.SSID=SSID;
 		this.type = type;
+		this.BSSID=BSSID;
+		this.capabillities=capabillities;
+	}
+
+	
+
+	public void setCapabillities(String capabillities) {
+		this.capabillities = capabillities;
 	}
 
 	public info(info data) {
@@ -30,6 +41,8 @@ public class info implements Meta_data{
 		this.UTC = 0;
 		this.SSID = "";
 		this.type = "";
+		this.BSSID="";
+		this.capabillities="";
 	}
 	
 	@Override
@@ -45,7 +58,7 @@ public class info implements Meta_data{
 	
 	@Override
 	public String toString() {
-		return "SSID: "+this.getSSID()+" , UTC: "+this.getUTC()+" , Type: "+this.getType();
+		return  this.getSSID()+this.BSSID+this.capabillities+this.getUTC()+this.getType();
 	}
 
 	public void setUTC(long UTC) {
@@ -66,5 +79,16 @@ public class info implements Meta_data{
 	
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getBSSID() {
+		return BSSID;
+	}
+
+	public void setBSSID(String bSSID) {
+		BSSID = bSSID;
+	}
+
+	public String getCapabillities() {
+		return capabillities;
 	}
 }

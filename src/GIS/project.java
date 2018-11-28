@@ -6,15 +6,20 @@ import java.util.Iterator;
 public class project implements GIS_project {
 
 	private ArrayList<GIS_layer> layers;
-	
+	private static int counter;
 	
 	@Override
 	public boolean add(GIS_layer e) {
+		e.setName(counter++);
 		return layers.add(e);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_layer> c) {
+		Iterator<GIS_layer> itr = (Iterator<GIS_layer>) c.iterator();
+		while(itr.hasNext()) {
+			itr.next().setName(counter++);
+		}
 		return layers.addAll(c);
 	}
 
@@ -75,11 +80,11 @@ public class project implements GIS_project {
 	}
 
 	@Override
-	public ArrayList<Meta_data> get_Meta_data() {
-		ArrayList<Meta_data> info_layers = null;
-		Iterator<Meta_data> itr = info_layers.iterator();
+	public ArrayList<ArrayList<Meta_data>> get_Meta_data() {
+		ArrayList<ArrayList<Meta_data>> info_layers = null;
+		Iterator<GIS_layer> itr = layers.iterator();
 		while(itr.hasNext())
-			info_layers.add(itr.next());
+			info_layers.add(itr.next().get_Meta_data());
 		return info_layers;
 	}
 

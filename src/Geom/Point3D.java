@@ -22,6 +22,23 @@ public class Point3D implements Geom_element, Serializable
 		_y=p.y();
 		_z=p.z();
 	}
+	public Point3D() {
+		this._x=0;
+		this._y=0;
+		this._z=0;
+	}
+	public void set_x(double _x) {
+		this._x = _x;
+	}
+
+	public void set_y(double _y) {
+		this._y = _y;
+	}
+
+	public void set_z(double _z) {
+		this._z = _z;
+	}
+
 	public Point3D(double x,double y) 
 	{this(x,y,0);}
 	public Point3D(String s) {
@@ -187,20 +204,20 @@ public final static int DOWN = 6, UP = 7;
 	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
 	up:(PI/2)  , down (-PI/2) , right(0),  left(+- PI).   [-PI, +PI]	*/
 	public double angleXY(Point3D p) {
-		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
+		if(p==null) throw new RuntimeException("* Error: Point3D angle got null *");
 		return Math.atan2((p._y-_y), (p._x-_x));
 	}
 	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
 	up:(PI/2)  , down (1.5PI) , right(0),  left(PI).   [0,2PI].	*/
 	public double angleXY_2PI(Point3D p) {
-		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
+		if(p==null) throw new RuntimeException("* Error: Point3D angle got null *");
 		double ans = Math.atan2((p._y-_y), (p._x-_x));
 		if (ans<0) ans = 2*Math.PI+ans;
 		return ans;
 	}
 	/** computes the angleZ between p1 and p2 in RADIANS */ 							
 	public double angleZ(Point3D p) {
-		if(p==null) throw new RuntimeException("** Error: Point3D angleZ got null **");
+		if(p==null) throw new RuntimeException("* Error: Point3D angleZ got null *");
 		return Math.atan2((p._z-_z), this.distance2D(p));
 	}	
 /** return the (planer angle of the vector between this --> p, in DEGREES, in a
@@ -237,4 +254,5 @@ public final static int DOWN = 6, UP = 7;
 	/** transform from radians to angles */
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
+
 }
