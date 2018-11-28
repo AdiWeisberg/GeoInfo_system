@@ -1,0 +1,41 @@
+package GIS;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+
+public class Csv2kml {
+
+	public static void main(String[] args) throws ParseException {
+		String csvFile = "WigleWifi_20171201110209.csv";
+		String line = "";
+		String cvsSplitBy = ",";
+		ArrayList<GpsData> dataFromCsv =new ArrayList();///
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) 
+		{
+			line = br.readLine();
+			line = br.readLine();
+			while ((line = br.readLine()) != null) //after 2 line
+			{
+				String[] userInfo = line.split(cvsSplitBy);
+
+				info data =new info(userInfo[3],userInfo[1],userInfo[10]);
+				GpsData newData=new GpsData(Double.parseDouble(userInfo[7]),
+						Double.parseDouble(userInfo[6]),Double.parseDouble(userInfo[8]),data);
+				System.out.println(newData);
+				//System.out.println("MAC: " + userInfo[0] + " , SSID: " + userInfo[1] +
+				//	" AuthMode: " + userInfo[2] + " FirstSeen: " + userInfo[3] +"Channel:"+userInfo[4]+"RSSI:"+userInfo[5] 
+				//		+"CurrentLatitude:"+userInfo[6]+"CurrentLongitude:"+userInfo[7]+"AltitudeMeters:"+userInfo[8]
+				//			+"AccuracyMeters:"+userInfo[9]+"Type:"+userInfo[10]);
+			}
+
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+}
