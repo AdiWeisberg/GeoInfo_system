@@ -1,5 +1,7 @@
 package GIS;
 
+import java.util.ArrayList;
+
 import Geom.Geom_element;
 import Geom.Point3D;
 
@@ -27,7 +29,7 @@ public class GpsData implements GIS_element{
 	}
 
 	public Meta_data getData() {
-	
+
 		return this.getData();
 	}
 
@@ -38,7 +40,7 @@ public class GpsData implements GIS_element{
 	public void translate(Point3D vec) {
 		gpsPoint= new Point3D(vec.x(),vec.y(),vec.z());
 	}
-	
+
 	public double get_long() {
 		return gpsPoint.y();
 	}
@@ -58,12 +60,12 @@ public class GpsData implements GIS_element{
 		gpsPoint.set_z(_alt);
 	}
 	public String toString() {
-		return "point:"+gpsPoint.x()+","+gpsPoint.y()+","+gpsPoint.z()+","+"Meta data:" +data.toString() ;
+		return ""+gpsPoint.x()+","+gpsPoint.y()+","+gpsPoint.z()+","+data.toString();
 	}
 	public String PointString() {
 		return ""+gpsPoint.x()+","+gpsPoint.y()+","+gpsPoint.z();
 	}
-public String DataString() {
+	public String DataString() {
 		return data.toString();
 	}
 

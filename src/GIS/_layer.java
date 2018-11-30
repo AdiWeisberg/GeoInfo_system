@@ -10,8 +10,8 @@ public class _layer implements GIS_layer {
 	
 	private ArrayList<GIS_element> layer;
 	private int name;
-
 	
+
 	public _layer() {
 		layer = new ArrayList<GIS_element>();  // 0 -> Point3D , 1 -> Info of the point
 		this.name=0;
@@ -19,12 +19,12 @@ public class _layer implements GIS_layer {
 	
 	@Override
 	public boolean add(GIS_element GPSdata) {
-		return layer.add((GpsData) GPSdata);
+		return layer.add(GPSdata);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_element> arg0) {
-		return layer.addAll((Collection<? extends GpsData>) arg0);
+		return layer.addAll(arg0);
 	}
 
 	@Override
@@ -107,5 +107,15 @@ public class _layer implements GIS_layer {
 	}
 	public GIS_element get_gpsData(int i) {
 		return layer.get(i);
+	}
+	
+	@Override
+	public ArrayList<String> layerString() {
+		ArrayList<String> strLayer = new ArrayList<String>();
+		Iterator<GIS_element> itr = layer.iterator();
+		while(itr.hasNext()) {
+			strLayer.add(itr.next().toString()+"\n");
+		}
+		return strLayer;
 	}
 }

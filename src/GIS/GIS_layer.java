@@ -14,4 +14,6 @@ public interface GIS_layer extends Set<GIS_element>{
 
 	public ArrayList<GIS_element> getLayer(); 
 	
+	public ArrayList<String> layerString();
+
 }

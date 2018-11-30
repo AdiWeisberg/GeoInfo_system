@@ -6,20 +6,24 @@ import java.util.Iterator;
 public class project implements GIS_project {
 
 	private ArrayList<GIS_layer> layers;
-	private static int counter;
 	
+	
+	public project(){
+		layers=new  ArrayList<GIS_layer>();
+	}
+	public project(ArrayList<GIS_layer> layers){
+		this.layers = new ArrayList<GIS_layer>();
+		this.layers.addAll(layers);
+	}
 	@Override
 	public boolean add(GIS_layer e) {
-		e.setName(counter++);
 		return layers.add(e);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_layer> c) {
-		Iterator<GIS_layer> itr = (Iterator<GIS_layer>) c.iterator();
-		while(itr.hasNext()) {
-			itr.next().setName(counter++);
-		}
+		if(c.isEmpty())
+			return false;
 		return layers.addAll(c);
 	}
 
@@ -87,5 +91,9 @@ public class project implements GIS_project {
 			info_layers.add(itr.next().get_Meta_data());
 		return info_layers;
 	}
+	public ArrayList<GIS_layer> getLayers() {
+		return layers;
+	}
+
 
 }
