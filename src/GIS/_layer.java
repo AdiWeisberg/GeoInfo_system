@@ -10,11 +10,11 @@ public class _layer implements GIS_layer {
 	
 	private ArrayList<GIS_element> layer;
 	private int name;
-	
+	private static int counter = 0;
 
 	public _layer() {
 		layer = new ArrayList<GIS_element>();  // 0 -> Point3D , 1 -> Info of the point
-		this.name=0;
+		this.name = ++counter;
 	}
 	
 	@Override

@@ -19,21 +19,22 @@ public class JAVA_to_KML {
 		+"<Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon>"
 				+"</IconStyle></Style><Style id=\"green\"><IconStyle><Icon>"
 		+"<href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style>"
-				+"<Folder><name>Wifi Networks</name>";
+				+"<name>GeoLayers</name>";
 		content.add(kmlstart);
 
-		String kmlend = "</Folder>\r\n" + 
-				"</Document></kml>";
+		String kmlend = "</Document></kml>";
 		Iterator<GIS_layer> itr = a.iterator();
 		try{
 			FileWriter fw = new FileWriter(output); // path to the new address
 			BufferedWriter bw = new BufferedWriter(fw);
 			while(itr.hasNext()) {
-				ArrayList<String> GPSelement = itr.next().layerString();
-				String kmlelement = "<Folder>";
+				GIS_layer currLayer = itr.next();
+				ArrayList<String> GPSelement = currLayer.layerString();
+				String kmlStartlayer = "<Folder><name>"+currLayer.getName()+"</name>";
+				content.add(kmlStartlayer);
 				for (int i = 0; i < GPSelement.size(); i++) {
 					String[] gpsData =  GPSelement.get(i).split(",");
-					kmlelement ="<Placemark>\n" +
+					String kmlelement ="<Placemark>\n" +
 							"<name>"+gpsData[3]+"</name>\n" +
 							"<description>BSSID: <b>"+gpsData[4]+"</b><br/>Capabilities: <b>"
 									+gpsData[5]+"</b><br/>Type: <b>"+gpsData[7]+"</b><br/>Timestamp: <b>"
@@ -45,9 +46,11 @@ public class JAVA_to_KML {
 							"</Placemark>\n";
 					content.add(kmlelement);
 				}
+				String kmlEndlayer = "</Folder>\n";
+				content.add(kmlEndlayer);
 			} 
 			content.add(kmlend);
-			String csv = content.toString().replaceAll(",", "").replace("[", "").replace("]", "");
+			String csv = content.toString().replace("[", "").replace("]", "");
 			bw.write(csv);
 			bw.close();
 		}
