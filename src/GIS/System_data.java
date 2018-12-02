@@ -8,7 +8,10 @@ import java.util.Date;
 import java.util.Random;
 
 import Geom.Point3D;
-
+/**class System_data- Represents information of a layer or a collection of geographic layers. 
+ * It contains: the time when the layer or collection is created,
+the color in which it will be displayed in Google earth created in a random manner
+ * @author Naomi and Adi*/
 public class System_data implements Meta_data{
 
 	private int name;
@@ -18,14 +21,15 @@ public class System_data implements Meta_data{
 	private static int counter = 0;
 	static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-
+	/** constructor 
+	 * @throws ParseException - Because you convert String information to a date then it can bounces an error if you can not convert*/
 	public System_data() throws ParseException {
 		this.name = ++counter;
 		this.color = randColor();
 		this.UTC = curTime2UTC();
 		this.longUTC = UTC.getTime();
 	}
-
+	//Create time by computer time now.
 	private Date curTime2UTC() throws ParseException { // based on Israel Summer time.
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -33,6 +37,7 @@ public class System_data implements Meta_data{
 		String UTC = sdf.format(cal.getTime());
 		return sdf.parse(UTC);
 	}
+	//Creates color in a random way.
 	private Color randColor() {
 		Random rand = new Random();
 
@@ -91,4 +96,3 @@ public class System_data implements Meta_data{
 	}
 
 }
-

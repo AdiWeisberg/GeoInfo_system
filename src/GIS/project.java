@@ -3,18 +3,24 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
+/**
+ * class project - A collection of layers sustained by an array of layers.
+ * @author Naomi and Adi
+ *@implements GIS_project
+ */
 public class project implements GIS_project {
 
 	private ArrayList<GIS_layer> layers;
 	private Meta_data data;
-	private static int counter = 0; // ID counter
 	
+	 /** constructor 
+ * @throws ParseException - Because you convert String information to a date then it can bounces an error if you can not convert*/
 	public project() throws ParseException{
 		layers=new  ArrayList<GIS_layer>();
 		this.data = new System_data();
-		
-	}
+		}
+	/**constructor that Get an array list of layers and put it into its layer.
+	 * @param layers -An array that is deeply reproduced*/
 	public project(ArrayList<GIS_layer> layers){
 		this.layers = new ArrayList<GIS_layer>();
 		this.layers.addAll(layers);
@@ -86,7 +92,7 @@ public class project implements GIS_project {
 	public <T> T[] toArray(T[] a) {
 		return layers.toArray(a);
 	}
-
+	/**get_Meta_data - @return Meta_data - of the project-name,time.. */
 	@Override
 	public Meta_data get_Meta_data() {
 		return this.data;

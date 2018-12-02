@@ -4,9 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * This class gets path of a folder and scan all the files in it to find CSV files.
+ * @author Naomi && Adi
+ *
+ */
 public class MultiCSV {
 
+	/**
+	 * This function gets path of a folder and scan all the files recursibly in it to find CSV files.
+	 * @param path - path of a folder
+	 * @return ArrayList of CSV path files in string.
+	 */
 	public static ArrayList<String> scanCSV(String path){
 		File directory = new File(path);
 		String[] directoryContents = directory.list();
@@ -30,24 +39,5 @@ public class MultiCSV {
 		}
 	}
 
-	//	public static void main(String[] args) {
-	//
-	//		ArrayList<String> bla = scanCSV("C:\\Users\\עדי\\eclipse-workspace\\GeoInfo_System\\FilesToTransfare");
-	//		
-	//		//print-TEST: 
-	//		Iterator<String> itr = bla.iterator();
-	//		while(itr.hasNext()) {
-	//			System.out.println(itr.next());
-	//		}
-
-
-
-
-
-
-	//		for(String fileName: directoryContents) {
-	//			File temp = new File(String.valueOf(directory),fileName);
-	//			fileLocations.add(String.valueOf(temp));
-	//		}
 }
 

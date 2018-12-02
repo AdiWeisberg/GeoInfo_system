@@ -29,7 +29,7 @@ public class info implements Meta_data{
 	 * @param capabillities - The client's device AuthMod.
 	 * @param dateTime - The client's first-seen date at the GeoPoint.
 	 * @param type - The client's Internet connection type.
-	 * @throws ParseException - if the date time can't be convert to long. 
+	 * @throws ParseException - if the date time can't be convert.
 	 */
 	public info(String SSID,String BSSID,String capabillities,String dateTime, String type) throws ParseException{
 		Date UTC = GMTtoUTC(dateTime, -2);// this time fits to Israel summer time. 

@@ -10,6 +10,11 @@ import GIS.*;
 
 public class JAVA_to_KML {
 
+	/**
+	 * This function gets ArrayList of layers and converts it to KML file that can be display on google earth.
+	 * @param a - gets ArrayList of layers 
+	 * @param output - choose the name of the new KML file.
+	 */
 	public void writeFile(ArrayList<GIS_layer> a, String output) {
 		ArrayList<String> content = new ArrayList<String>(); // the content in long String
 		String kmlstart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 

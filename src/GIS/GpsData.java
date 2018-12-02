@@ -18,7 +18,7 @@ public class GpsData implements GIS_element{
  * @param data
  */
 	public	GpsData(double _long,double _lat,double _alt,info data) {
-		gpsPoint= new Point3D(_lat, _long,_alt);
+		gpsPoint= new Point3D(_long, _lat,_alt);
 		this.data=new info(data);
 	}
 	/**

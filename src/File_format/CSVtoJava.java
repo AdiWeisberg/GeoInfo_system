@@ -12,13 +12,18 @@ import GIS.GpsData;
 import GIS._layer;
 import GIS.info;
 /**
- * function that get address of csv file and convert it to GIS_layer(java class).
- * @param newCSV
- * @throws ParseException 
+ * This class converts CSV files to java data structures.
  */
 
 public class CSVtoJava {
-
+//This class gets paths of csv files and convert it to GIS_layer(java class).
+	/**
+	 * This function takes the CSV files and read them into new layers for each CSV file. 
+	 * 
+	 * @param paths - ArrayList of CSV path files to convert.
+	 * @return
+	 * @throws ParseException - if the date time can't be convert.
+	 */
 	public ArrayList<GIS_layer> convert(ArrayList<String> paths) throws ParseException {
 		Iterator<String> itr = paths.iterator();
 		ArrayList<GIS_layer> newProject= new ArrayList<GIS_layer>();
@@ -40,10 +45,6 @@ public class CSVtoJava {
 							Double.parseDouble(userInfo[6]),Double.parseDouble(userInfo[8]),data);
 					newLayer.add(newData);
 					System.out.println(newData);
-					//System.out.println("MAC: " + userInfo[0] + " , SSID: " + userInfo[1] +
-					//	" AuthMode: " + userInfo[2] + " FirstSeen: " + userInfo[3] +"Channel:"+userInfo[4]+"RSSI:"+userInfo[5] 
-					//		+"CurrentLatitude:"+userInfo[6]+"CurrentLongitude:"+userInfo[7]+"AltitudeMeters:"+userInfo[8]
-					//			+"AccuracyMeters:"+userInfo[9]+"Type:"+userInfo[10]);
 				}
 				newProject.add(newLayer);
 
