@@ -55,7 +55,7 @@ public class Csv2kml {
 		System.out.println("Please type a CSV file OR folder that containing CSV files: ");
 		Scanner sc = new Scanner(System.in);
 		String path = sc.nextLine();
-		createProject(path);
+		createProject(path); // \...\GeoInfo_System\FilesToTransfare
 
 	}
 
