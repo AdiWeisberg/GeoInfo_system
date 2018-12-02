@@ -30,7 +30,7 @@ public class JAVA_to_KML {
 			while(itr.hasNext()) {
 				GIS_layer currLayer = itr.next();
 				ArrayList<String> GPSelement = currLayer.layerString();
-				String kmlStartlayer = "<Folder><name>"+currLayer.getName()+"</name>";
+				String kmlStartlayer = "<Folder><name>"+currLayer.get_Meta_data().getName()+"</name>";
 				content.add(kmlStartlayer);
 				for (int i = 0; i < GPSelement.size(); i++) {
 					String[] gpsData =  GPSelement.get(i).split(",");

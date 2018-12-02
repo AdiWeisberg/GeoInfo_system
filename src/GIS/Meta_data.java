@@ -1,5 +1,7 @@
 package GIS;
 
+import java.awt.Color;
+
 import Geom.Point3D;
 
 public interface Meta_data {
@@ -11,4 +13,10 @@ public interface Meta_data {
 	 * @return the orientation: yaw, pitch and roll associated with this data;
 	 */
 	public Point3D get_Orientation();
+
+	public Color getColor();
+	
+	public int getName();
+	
+	public void setName(int name);
 }

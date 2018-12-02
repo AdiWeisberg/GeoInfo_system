@@ -1,4 +1,6 @@
 package GIS;
+
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,8 +33,9 @@ public class info implements Meta_data{
 	 */
 	public info(String SSID,String BSSID,String capabillities,String dateTime, String type) throws ParseException{
 		Date UTC = GMTtoUTC(dateTime, -2);// this time fits to Israel summer time. 
+		Date oldDate = sdf.parse(dateTime);
 		this.strUTC = sdf.format(UTC);
-		this.UTC = UTC.getTime();
+		this.UTC = UTC.getTime();//gets the client's first seen long type date in UTC time.
 		this.SSID=SSID;
 		this.type = type;
 		this.BSSID=BSSID;
@@ -42,16 +45,17 @@ public class info implements Meta_data{
 	/**
 	 * This function gets string of the client's first connection date-time and converts it to UTC-time by Israel time
 	 * in order to use it for Google-Earth maps.
-	 * @param dateTime - The client's first connection date time as shown at their devices.
-	 * @return Date time that has been convert from GMT time to UTC. 
-	 * @throws ParseException - throw an Exception if the time can't be convert to UTC. 
+	 * @param dateTime - The client device's first seen time.
+	 * @param hours - the GSM offset based on Israel summer time. 
+	 * @return date convert to UTC time. 
+	 * @throws ParseException - throw an Exception if it can't convert to date - Unparseable date case.
 	 */
 	public Date GMTtoUTC(String dateTime, int hours) throws ParseException {
 		Date oldDate = sdf.parse(dateTime);
 		Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(oldDate);
-	    calendar.add(Calendar.HOUR_OF_DAY, hours);
-	    return calendar.getTime();
+		calendar.setTime(oldDate);
+		calendar.add(Calendar.HOUR_OF_DAY, hours);
+		return calendar.getTime();
 	}
 
 	/**
@@ -186,5 +190,20 @@ public class info implements Meta_data{
 	 */
 	public String getCapabillities() {
 		return capabillities;
+	}
+
+	@Override
+	public Color getColor() {
+		return null;
+	}
+
+	@Override
+	public int getName() {
+		return 0;
+	}
+
+	@Override
+	public void setName(int name) {
+		
 	}
 }

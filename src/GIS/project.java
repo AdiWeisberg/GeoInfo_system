@@ -1,4 +1,5 @@
 package GIS;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -6,10 +7,13 @@ import java.util.Iterator;
 public class project implements GIS_project {
 
 	private ArrayList<GIS_layer> layers;
+	private Meta_data data;
+	private static int counter = 0; // ID counter
 	
-	
-	public project(){
+	public project() throws ParseException{
 		layers=new  ArrayList<GIS_layer>();
+		this.data = new System_data();
+		
 	}
 	public project(ArrayList<GIS_layer> layers){
 		this.layers = new ArrayList<GIS_layer>();
@@ -84,12 +88,8 @@ public class project implements GIS_project {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Meta_data>> get_Meta_data() {
-		ArrayList<ArrayList<Meta_data>> info_layers = null;
-		Iterator<GIS_layer> itr = layers.iterator();
-		while(itr.hasNext())
-			info_layers.add(itr.next().get_Meta_data());
-		return info_layers;
+	public Meta_data get_Meta_data() {
+		return this.data;
 	}
 	public ArrayList<GIS_layer> getLayers() {
 		return layers;

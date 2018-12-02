@@ -39,7 +39,7 @@ public class CSVtoJava {
 					GpsData newData=new GpsData(Double.parseDouble(userInfo[7]),
 							Double.parseDouble(userInfo[6]),Double.parseDouble(userInfo[8]),data);
 					newLayer.add(newData);
-					//System.out.println(newData);
+					System.out.println(newData);
 					//System.out.println("MAC: " + userInfo[0] + " , SSID: " + userInfo[1] +
 					//	" AuthMode: " + userInfo[2] + " FirstSeen: " + userInfo[3] +"Channel:"+userInfo[4]+"RSSI:"+userInfo[5] 
 					//		+"CurrentLatitude:"+userInfo[6]+"CurrentLongitude:"+userInfo[7]+"AltitudeMeters:"+userInfo[8]

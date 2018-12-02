@@ -1,5 +1,6 @@
 package GIS;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,12 +10,12 @@ import Geom.Geom_element;
 public class _layer implements GIS_layer {
 	
 	private ArrayList<GIS_element> layer;
-	private int name;
-	private static int counter = 0;
+	private Meta_data data;
+	private static int counter = 0; // ID counter
 
-	public _layer() {
+	public _layer() throws ParseException {
 		layer = new ArrayList<GIS_element>();  // 0 -> Point3D , 1 -> Info of the point
-		this.name = ++counter;
+		this.data = new System_data();
 	}
 	
 	@Override
@@ -77,17 +78,14 @@ public class _layer implements GIS_layer {
 		return layer.toArray(a);
 	}
 	@Override
-	public ArrayList<Meta_data> get_Meta_data() {
+	public ArrayList<Meta_data> get_all_metadata() {
 		ArrayList<Meta_data> ans = new ArrayList<Meta_data>();
 		for(int i=0; i<layer.size(); i++) {
 			ans.add(layer.get(i).getData());
 		}
 		return ans;
 	}
-	@Override
-	public int getName() {
-		return this.name;
-	}
+	
 	@Override
 	public ArrayList<Geom_element> getItems() {
 		ArrayList<Geom_element> ans = new ArrayList<Geom_element>();
@@ -95,10 +93,6 @@ public class _layer implements GIS_layer {
 			ans.add(layer.get(i).getGeom());
 		}
 		return ans;
-	}
-	@Override
-	public void setName(int i) {
-		this.name = i;
 	}
 	
 	@Override
@@ -117,5 +111,17 @@ public class _layer implements GIS_layer {
 			strLayer.add(itr.next().toString()+"\n");
 		}
 		return strLayer;
+	}
+
+	@Override
+	public Meta_data get_Meta_data() {
+		return this.data;
+	}
+	
+	public static void main(String[] args) throws ParseException {
+		GIS_layer l1 = new _layer();
+		GIS_layer l2 = new _layer();
+		System.out.println(l1.get_Meta_data().toString());
+		System.out.println(l2.get_Meta_data().toString());
 	}
 }
