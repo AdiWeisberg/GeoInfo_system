@@ -12,7 +12,7 @@ import java.util.List;
 public class MultiCSV {
 
 	/**
-	 * This function gets path of a folder and scan all the files recursibly in it to find CSV files.
+	 * This function gets path of a folder and scan all the files in it to find CSV files.
 	 * @param path - path of a folder
 	 * @return ArrayList of CSV path files in string.
 	 */

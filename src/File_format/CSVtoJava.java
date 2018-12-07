@@ -44,7 +44,6 @@ public class CSVtoJava {
 					GpsData newData=new GpsData(Double.parseDouble(userInfo[7]),
 							Double.parseDouble(userInfo[6]),Double.parseDouble(userInfo[8]),data);
 					newLayer.add(newData);
-					System.out.println(newData);
 				}
 				newProject.add(newLayer);
 

@@ -72,7 +72,7 @@ public class MyCoords implements coords_converter  {
 		Point3D ans=new Point3D (x,y,z);
 		return ans;
 	}
-	//protected function that calculates the azimuth, is taken from the following link-///////
+	//protected function that calculates the azimuth, is taken from the following link-https://stackoverflow.com/questions/9457988/bearing-from-one-coordinate-to-another/29471137
 	protected static double bearing(double lat1, double lon1, double lat2, double lon2){
 		  double longitude1 = lon1;
 		  double longitude2 = lon2;
