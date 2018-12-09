@@ -27,6 +27,7 @@ public class Point3D implements Geom_element, Serializable
 		this._y=0;
 		this._z=0;
 	}
+	
 	public void set_x(double _x) {
 		this._x = _x;
 	}
@@ -39,8 +40,9 @@ public class Point3D implements Geom_element, Serializable
 		this._z = _z;
 	}
 
-	public Point3D(double x,double y) 
+	public Point3D(double x,double y) //Point2D
 	{this(x,y,0);}
+	
 	public Point3D(String s) {
 		String[] a = s.split(",");
 		_x = Double.parseDouble(a[0]);
