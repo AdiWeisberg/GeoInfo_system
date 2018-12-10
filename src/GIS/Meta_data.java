@@ -13,9 +13,6 @@ public interface Meta_data {
 	 * @return the orientation: yaw, pitch and roll associated with this data;
 	 */
 	public Point3D get_Orientation();
-
-	public Color getColor();
-	
 	public int getName();
 	
 	public void setName(int name);

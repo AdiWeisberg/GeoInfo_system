@@ -14,12 +14,12 @@ import Geom.Point3D;
  * @since 01/12/2018
  */
 public class info implements Meta_data{
+	private Point3D point;
+	private String time;
 	private long UTC;
-	private String strUTC;
-	private String SSID;
-	private String type;
-	private String BSSID;
-	private String capabillities;
+	private int name;
+	private int speed;
+	private int radiusEat;
 	static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
@@ -31,15 +31,15 @@ public class info implements Meta_data{
 	 * @param type - The client's Internet connection type.
 	 * @throws ParseException - if the date time can't be convert.
 	 */
-	public info(String SSID,String BSSID,String capabillities,String dateTime, String type) throws ParseException{
-		Date UTC = GMTtoUTC(dateTime, -2);// this time fits to Israel summer time. 
-		Date oldDate = sdf.parse(dateTime);
-		this.strUTC = sdf.format(UTC);
+	public info(Point3D point,int name,String time, int speed,int radiusEat ) throws ParseException{
+		this.point=point;
+		this.name=name;
+		this.speed=speed;
+		this.radiusEat=radiusEat;
+		Date UTC = GMTtoUTC(time, -2);// this time fits to Israel summer time. 
+		Date oldDate = sdf.parse(time);
+		this.time= sdf.format(UTC);
 		this.UTC = UTC.getTime();//gets the client's first seen long type date in UTC time.
-		this.SSID=SSID;
-		this.type = type;
-		this.BSSID=BSSID;
-		this.capabillities=capabillities;
 	}
 
 	/**
@@ -58,25 +58,20 @@ public class info implements Meta_data{
 		return calendar.getTime();
 	}
 
-	/**
-	 * This function gets Auto-mood information from the client's device and update it. 
-	 * @param capabillities - Auto-mood information from the client's device.
-	 */
-	public void setCapabillities(String capabillities) {
-		this.capabillities = capabillities;
-	}
-
+	
 	/**
 	 * This function gets data from Info type and set the function current data to be the same as the input. 
 	 * @param data - other information about the Geo-Point. (like datetime, SSID, BSSID..)
 	 */
 	public info(info data) {
-		this.setUTC(data.getUTC());
-		this.setSSID(data.getSSID());
-		this.setType(data.getType());
-		this.setBSSID(data.getBSSID());
-		this.setCapabillities(data.getCapabillities());
-		this.setStrUTC(data.getStrUTC());
+		this.point=info.point;
+		this.name=name;
+		this.speed=speed;
+		this.radiusEat=radiusEat;
+		Date UTC = GMTtoUTC(time, -2);// this time fits to Israel summer time. 
+		Date oldDate = sdf.parse(time);
+		this.time= sdf.format(UTC);
+		this.UTC = UTC.getTime();//gets the client's first seen long type date in UTC time.
 	}
 
 	/**
@@ -84,7 +79,7 @@ public class info implements Meta_data{
 	 * @return strUTC - String of the client's first seen UTC time. 
 	 */
 	public String getStrUTC() {
-		return strUTC;
+		return this.time;
 	}
 
 
@@ -93,20 +88,23 @@ public class info implements Meta_data{
 	 * @param strUTC
 	 */
 	public void setStrUTC(String strUTC) {
-		this.strUTC = strUTC;
+		this.time = strUTC;
 	}
 
 
 	/**
 	 * creates an empty constructor.
+	 * @throws ParseException 
 	 */
-	public info() {
-		this.UTC = 0;
-		this.SSID = "";
-		this.type = "";
-		this.BSSID="";
-		this.capabillities="";
-		this.strUTC="";
+	public info() throws ParseException {
+		this.point=new Point3D();
+		this.name=0;
+		this.speed=0;
+		this.radiusEat=0;
+		Date UTC = GMTtoUTC(time, -2);// this time fits to Israel summer time. 
+		Date oldDate = sdf.parse(time);
+		this.time= sdf.format(UTC);
+		this.UTC = UTC.getTime();//gets the client's first seen long type date in UTC time.
 	}
 
 	/**
@@ -122,8 +120,7 @@ public class info implements Meta_data{
 	 */
 	@Override
 	public Point3D get_Orientation() { //Boaz told us to keep it NULL at this point.
-		// TODO Auto-generated method stub
-		return null;
+		return this.point;
 	}
 
 	/**
@@ -131,7 +128,7 @@ public class info implements Meta_data{
 	 */
 	@Override
 	public String toString() {
-		return  this.getSSID()+","+this.getBSSID()+","+this.getCapabillities()+","+this.getUTC()+","+this.getType()+","+this.strUTC;
+		return  this.point+","+this.name+","+this.speed+","+this.radiusEat+","+this.UTC+","+this.time;
 	}
 
 	/**
@@ -142,68 +139,12 @@ public class info implements Meta_data{
 		this.UTC = UTC;
 	}
 
-	/**
-	 * @return string of the client's WIFI network name.
-	 */
-	public String getSSID() {
-		return SSID;
-	}
-
-	/**
-	 * This function set the client's WIFI network name.
-	 * @param sSID - Service Set Identifier (the WIFI name).
-	 */
-	public void setSSID(String sSID) {
-		SSID = sSID;
-	}
-
-	/**
-	 * @return string of the client's Internet type.(WIFI\GSM..).
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * This function the client's Internet type.(WIFI\GSM..). 
-	 * @param type - the client's device Internet type.(WIFI\GSM..).
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-	/**
-	 * @return the MAC address of the client's device.
-	 */
-	public String getBSSID() {
-		return BSSID;
-	}
-
-	/**
-	 * This function sets the MAC address of the client's device.
-	 * @param bSSID - AP MAC address ,the MAC address of the client's device.
-	 */
-	public void setBSSID(String bSSID) {
-		BSSID = bSSID;
-	}
-	/**
-	 * @return string of the Auto-mood of the client's device.
-	 */
-	public String getCapabillities() {
-		return capabillities;
-	}
-
-	@Override
-	public Color getColor() {
-		return null;
-	}
-
 	@Override
 	public int getName() {
-		return 0;
+		return this.name;
 	}
 
 	@Override
 	public void setName(int name) {
-		
-	}
+		this.name=name;	}
 }
