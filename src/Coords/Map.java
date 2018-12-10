@@ -1,7 +1,5 @@
 package Coords;
 
-//import java.awt.event.MouseEvent;
-//import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,17 +17,20 @@ import Geom.Point3D;
 public class Map{
 	private BufferedImage img;
 	private ConvertFactory cf;
-	
+	//private String path;  
 	/**
 	 * constructor for map that try to read an Image and calls ImageFactory to handle the image functionality.
 	 */
 	public Map() { // constructor
 		try {
-			this.img =ImageIO.read(new File("Ariel.jpg"));
+			String path = "Ariel.jpg";
+			if(!path.endsWith("jpg") && !path.endsWith("png")) {
+				throw new IOException("Can't read input file!");
+			}
+			this.img =ImageIO.read(new File(path));
 		} catch (IOException e) {
-			System.out.println("I'm in");
 			e.printStackTrace();
-			
+			System.exit(-1);
 		}
 		new ImageFactory(this.img); // take care for the creation of the map image and it's functionality.
 		cf = new ConvertFactory(this.getImg());
@@ -61,11 +62,18 @@ public class Map{
 		System.out.println(map.getCf().distancePicsel(p1,p2));
 
 	}
-
+	/**
+	 * This function returns a ConvertFactory object.
+	 * @return cf - object that helps this class to handle coords Conversions.
+	 */
 	public ConvertFactory getCf() {
 		return cf;
 	}
 
+	/**
+	 * This function sets a ConvertFactory object.
+	 * @param cf - object that helps this class to handle coords Conversions.
+	 */
 	public void setCf(ConvertFactory cf) {
 		this.cf = cf;
 	}
