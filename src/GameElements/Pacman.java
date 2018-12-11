@@ -16,11 +16,18 @@ public class Pacman implements GIS_element {
 	private Point3D point;
 	private Meta_data data;
 	
-	public Pacman(Point3D point,int name,String time, int speed,int radiusEat ) throws ParseException{
-		data= new info(point,name,time,speed,radiusEat);
+	public Pacman(String type,int name,Point3D point, int speed,int radiusEat ) throws ParseException{
+		data= new info(type,name,point,speed,radiusEat);
 		this.point = new Point3D(point);
 	}
-	
+	public Pacman(Meta_data newData) {
+		this.data=newData;
+		this.point=newData.get_Orientation();
+	}
+	public void addMeta_data(Meta_data newData) {
+		this.data=newData;
+		this.point=newData.get_Orientation();
+	}
 	public Point3D getPoint() {
 		return point;
 	}

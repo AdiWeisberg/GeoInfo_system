@@ -25,12 +25,9 @@ public class ImageFactory{
 		this.srcImg = img;
 		EventQueue.invokeLater(new Runnable() {
 
-			//private BufferedImage srcImg;
-
 			@Override
 			public void run() {
 				ResizableImagePanel pane = new ResizableImagePanel();
-				//this.srcImg =ImageIO.read(new File("Ariel.jpg"));
 				pane.setImage(srcImg);
 				JFrame frame = new JFrame("MapFrame");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

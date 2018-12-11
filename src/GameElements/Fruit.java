@@ -18,11 +18,18 @@ public class Fruit  implements GIS_element{
 	private Meta_data data;
 
 	
-	public Fruit(Point3D point,int name,String time, int weight ) throws ParseException{
+	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
 		this.point=point;
-		this.data=new info(point,name,time,weight,0);
+		this.data=new info(type,name,point,weight,0);
 	}
-	
+	public Fruit(Meta_data newData) {
+		this.data=newData;
+		this.point=newData.get_Orientation();
+	}
+	public void addMeta_data(Meta_data newData) {
+		this.data=newData;
+		this.point=newData.get_Orientation();
+	}
 public Point3D getPoint() {
 		return point;
 	}

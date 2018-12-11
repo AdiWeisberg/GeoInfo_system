@@ -44,7 +44,7 @@ public class Csv2kml {
 			else System.err.println("the path is not valid, please try again.");
 		}
 		else System.err.println("the path is not valid, please try again.");
-		p.addAll(ctj.convert(paths));
+		//p.addAll(ctj.convert(paths));
 		project p1= new project(p);
 		jtk.writeFile(p1.getLayers(), "newKml.kml");
 	}

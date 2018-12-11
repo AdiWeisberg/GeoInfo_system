@@ -10,6 +10,7 @@ import File_format.JavaToCSV;
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.Meta_data;
+import GIS.info;
 import Geom.Geom_element;
 
 public class Game{
@@ -28,18 +29,36 @@ public class Game{
  * @param paths-STRING array of files we'd like to convert
  * @throws ParseException- if the Conversion does not work. 
  */
-	public void csvToGame(ArrayList<String> paths) throws ParseException {
-		new CSVtoJava().convert(paths);
+	public void  csvToGame(ArrayList<String> paths) throws ParseException {
+		ArrayList<Meta_data> newData = new ArrayList<Meta_data>();
+		newData.addAll( new CSVtoJava().convert(paths));
+		setByCSV(newData);
+		
+	}
+	//Inserts the values we took from the CSV file into the ArrayList of pacmans and the ArrayList of fruits.
+	private void setByCSV(ArrayList<Meta_data> newData) {
+		Iterator<Meta_data> itr = newData.iterator();
+		while(itr.hasNext()) {
+			info newInfo=(info) itr.next();
+			if(newInfo.get_Type()=="P") {
+				Pacman p=new Pacman(newInfo);
+				pacmans.add(p);
+			}
+			else {
+				Fruit f= new Fruit(newInfo);
+				fruits.add(f);
+			}
+		}
+		
 	}
 	/**
 	 * Takes a game and converts it to a CSV file
 	 * @return-STRING array of disconnections to CSV folders we created.
 	 */
-	public ArrayList<String> GameTocsv() {
-		return	new JavaToCSV().JavaToCSV();		
+	public void GameTocsv( String fileName ,ArrayList<GIS_element> fruits,ArrayList<GIS_element> pacmans ) {
+		
+			new JavaToCSV().writeCsvFile(fileName , fruits,pacmans);		
 	}
-
-
 	//geter seters add empty clear//
 	public boolean addFruit(Fruit fruit) {
 		return fruits.add(fruit);
@@ -78,7 +97,13 @@ public class Game{
 		this.pacmans = pacmans;
 	}
 
-
+	public static void main(String[] args) throws ParseException {
+		ArrayList<String>paths= new ArrayList<String>();
+		Game g= new Game();
+		paths.add("game_1543693911932_b.csv");
+     g.csvToGame(paths) ;
+      g.GameTocsv("new.csv",g.fruits,g.pacmans);
+	}
 
 
 

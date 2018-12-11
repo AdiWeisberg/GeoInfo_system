@@ -1,5 +1,7 @@
 package GIS;
 
+import java.text.ParseException;
+
 import Geom.Geom_element;
 import Geom.Point3D;
 /**A class that represents a row from a csv file,
@@ -16,8 +18,9 @@ public class GpsData implements GIS_element{
  * @param _lat - lat x
  * @param _alt - alt z
  * @param data
+ * @throws ParseException 
  */
-	public	GpsData(double _long,double _lat,double _alt,info data) {
+	public	GpsData(double _long,double _lat,double _alt,info data) throws ParseException {
 		gpsPoint= new Point3D(_long, _lat,_alt);
 		this.data=new info(data);
 	}
@@ -25,14 +28,16 @@ public class GpsData implements GIS_element{
 	 * A constructor that receives point3d that document a point and information
 	 * @param p -Point3D 
 	 * @param data - info
+	 * @throws ParseException 
 	 */
-	public	GpsData(Point3D p,info data) {
+	public	GpsData(Point3D p,info data) throws ParseException {
 		this.data=new info(data);
 		gpsPoint= new Point3D(p.x(),p.y(),p.z());
 	}
 	
-	/** An empty constructor*/
-	public	GpsData() {
+	/** An empty constructor
+	 * @throws ParseException */
+	public	GpsData() throws ParseException {
 		gpsPoint= new Point3D();
 		data= new info();
 	}

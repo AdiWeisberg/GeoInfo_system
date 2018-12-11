@@ -64,10 +64,7 @@ public class System_data implements Meta_data{
 		this.name = name;
 	}
 
-	@Override
-	public Color getColor() {
-		return this.color;
-	}
+	
 
 	public void setColor(Color color) {
 		this.color = color;
@@ -92,7 +89,22 @@ public class System_data implements Meta_data{
 	}
 
 	public String toString() {
-		return "name: "+this.getName()+" , Color: "+this.getColor()+" , Time: "+this.getStrUTC()+" ";
+		return "name: "+this.getName()+" , Time: "+this.getStrUTC()+" ";
+	}
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSpeedweight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getRadius() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

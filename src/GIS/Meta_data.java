@@ -14,6 +14,8 @@ public interface Meta_data {
 	 */
 	public Point3D get_Orientation();
 	public int getName();
-	
+	public String getType();
+	public int getSpeedweight();
+	public int getRadius();
 	public void setName(int name);
 }
