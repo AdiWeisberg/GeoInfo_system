@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
+
 import GIS.GIS_element;
 import GIS.Meta_data;
 import GIS.info;
@@ -16,24 +18,44 @@ public class Fruit  implements GIS_element{
 
 	private Point3D point;
 	private Meta_data data;
+	private ImageIcon img;
 
-	
-	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
-		this.point=point;
-		this.data=new info(type,name,point,weight,0);
+	public Fruit() {
+		this.img = new ImageIcon("icons//dount.jpg");
 	}
-	public Fruit(Meta_data newData) {
+
+	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
+		this();
+		this.point=point;
+		this.data=new info(type,name,weight,0);
+	}
+	public Fruit(Point3D p) throws ParseException {
+		this();
+		this.point=p;
+		data= new info("f",1,1,0);
+	}
+	public Fruit(Point3D point,Meta_data newData) {
+		this();
 		this.data=newData;
-		this.point=newData.get_Orientation();
+		this.point=point;
+	}
+	public Fruit(GIS_element fruit) {
+		this.point=fruit.getPoint();
+		this.data=fruit.getData();
 	}
 	public void addMeta_data(Meta_data newData) {
 		this.data=newData;
 		this.point=newData.get_Orientation();
 	}
-public Point3D getPoint() {
+	public Point3D getPoint() {
 		return point;
 	}
-
+	public ImageIcon getImg() {
+		return img;
+	}
+	public void setImg(ImageIcon img) {
+		this.img = img;
+	}
 	public void setPoint(Point3D point) {
 		this.point = point;
 	}
@@ -46,14 +68,14 @@ public Point3D getPoint() {
 		this.data = data;
 	}
 
-@Override
-public Geom_element getGeom() {
-	return this.point;
-}
+	@Override
+	public Geom_element getGeom() {
+		return this.point;
+	}
 
-@Override
-public void translate(Point3D vec) {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void translate(Point3D vec) {
+		// TODO Auto-generated method stub
+
+	}
 }

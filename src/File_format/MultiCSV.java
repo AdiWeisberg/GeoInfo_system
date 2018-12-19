@@ -16,11 +16,11 @@ public class MultiCSV {
 	 * @param path - path of a folder
 	 * @return ArrayList of CSV path files in string.
 	 */
-	public static ArrayList<String> scanCSV(String path){
-		File directory = new File(path);
-		String[] directoryContents = directory.list();
+	public static ArrayList<String> scanCSV(File files){
+		//File directory = new File(path);
+		String[] directoryContents = files.list();
 		ArrayList<String> fileLocations = new ArrayList<String>();
-		return fileLocations = scanRecurs(directory,directoryContents,fileLocations,0);
+		return fileLocations = scanRecurs(files,directoryContents,fileLocations,0);
 	}
 
 	public static ArrayList<String> scanRecurs(File directory, String[] directoryContents, ArrayList<String> fileLocations, int index){

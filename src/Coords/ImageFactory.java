@@ -20,6 +20,7 @@ import Coords.Map;
 
 public class ImageFactory{
 	private static BufferedImage srcImg;
+	private JFrame frame;
 	
 	public ImageFactory(BufferedImage img) {
 		this.srcImg = img;
@@ -29,7 +30,7 @@ public class ImageFactory{
 			public void run() {
 				ResizableImagePanel pane = new ResizableImagePanel();
 				pane.setImage(srcImg);
-				JFrame frame = new JFrame("MapFrame");
+				 frame = new JFrame("Panter Game!");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.add(pane);
 				frame.pack();
@@ -60,7 +61,9 @@ class ResizableImagePanel extends JPanel  implements MouseListener {
 			repaint(); // redraw the map.
 		}
 	}
-
+public JFrame getFrame() {
+	return this.getFrame();
+}
 	public Image getImage() {
 		return img;
 	}

@@ -22,7 +22,7 @@ public class JavaToCSV {
 	//Delimiter used in CSV file
 		private static final String COMMA_DELIMITER = ",";
 		private static final String NEW_LINE_SEPARATOR = "\n";
-		
+		private static int id;
 		//CSV file header
 		private static final String FILE_HEADER = "Type,id,Lat,Lon,Alt,Speed/Weight,Radius";
 
@@ -43,15 +43,16 @@ public class JavaToCSV {
 				Iterator<GIS_element> itr1 = pacmans.iterator();
 				while(itr0.hasNext()) {
 					Fruit newFruit= (Fruit) itr0.next();
+					newFruit.getData().setName(id++);
 					fileWriter.append(String.valueOf(newFruit.getData().getType()));
 					fileWriter.append(COMMA_DELIMITER);
 					fileWriter.append(String.valueOf(newFruit.getData().getName()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newFruit.getData().get_Orientation().x()));
+					fileWriter.append(String.valueOf(newFruit.getPoint().x()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newFruit.getData().get_Orientation().y()));
+					fileWriter.append(String.valueOf(newFruit.getPoint().y()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newFruit.getData().get_Orientation().z()));
+					fileWriter.append(String.valueOf(newFruit.getPoint().z()));
 					fileWriter.append(COMMA_DELIMITER);
 					fileWriter.append(String.valueOf(newFruit.getData().getSpeedweight()));
 					fileWriter.append(COMMA_DELIMITER);
@@ -60,15 +61,16 @@ public class JavaToCSV {
 				}
 				while(itr1.hasNext()) {
 					Pacman newPacman= (Pacman) itr1.next();
+					newPacman.getData().setName(id++);
 					fileWriter.append(String.valueOf(newPacman.getData().getType()));
 					fileWriter.append(COMMA_DELIMITER);
 					fileWriter.append(String.valueOf(newPacman.getData().getName()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newPacman.getData().get_Orientation().x()));
+					fileWriter.append(String.valueOf(newPacman.getPoint().x()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newPacman.getData().get_Orientation().y()));
+					fileWriter.append(String.valueOf(newPacman.getPoint().y()));
 					fileWriter.append(COMMA_DELIMITER);
-					fileWriter.append(String.valueOf(newPacman.getData().get_Orientation().z()));
+					fileWriter.append(String.valueOf(newPacman.getPoint().z()));
 					fileWriter.append(COMMA_DELIMITER);
 					fileWriter.append(String.valueOf(newPacman.getData().getSpeedweight()));
 					fileWriter.append(COMMA_DELIMITER);

@@ -17,6 +17,8 @@ import Geom.Point3D;
 public class Map{
 	private BufferedImage img;
 	private ConvertFactory cf;
+	private int frameWidth;
+	private int frameHeigth;
 	//private String path;  
 	/**
 	 * constructor for map that try to read an Image and calls ImageFactory to handle the image functionality.
@@ -32,8 +34,7 @@ public class Map{
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		new ImageFactory(this.img); // take care for the creation of the map image and it's functionality.
-		cf = new ConvertFactory(this.getImg());
+		this.cf = new ConvertFactory(img.getWidth(),img.getHeight());
 	}
 
 	/**
@@ -53,13 +54,10 @@ public class Map{
 	}
 
 	public static void main(String[] args) {
-		Map map = new Map(); // creates Default map.
-		Point3D P=new Point3D(32.102495,35.207462);
-		System.out.println(map.getCf().GpsToPicsel(P));
-		Point3D p1=new Point3D(720,544);
-		System.out.println(map.getCf().PicselToGps(p1));
-		Point3D p2= new Point3D(672,598);
-		System.out.println(map.getCf().distancePicsel(p1,p2));
+//		Map map = new Map(); // creates Default map.
+//		Point3D P=new Point3D(32.00,35.00);
+//		System.out.println(map.getCf().GpsToPicsel(P));
+		
 
 	}
 	/**

@@ -17,7 +17,7 @@ import Geom.Point3D;
 public class ConvertFactory {
 
 
-	private BufferedImage myImg;
+	//private BufferedImage myImg;
 	static  int mapWidth , mapHeight;
 	// offsets
 	static final double mapLongitudeStart =35.212405, mapLatitudeStart =32.106046 ;
@@ -26,14 +26,13 @@ public class ConvertFactory {
 			// invert because it decreases as you go down
 			mapLatitude = mapLatitudeStart -32.101858;
 
+	public Point3D startPoint = new Point3D(35.202574,32.106046);
+	public Point3D endPoint = new Point3D(35.212405,32.101858);
 
 	/**constructor */
-	public ConvertFactory(BufferedImage img){
-		this.myImg = img;
-		this.mapWidth=myImg.getWidth();
-		this.mapHeight=myImg.getHeight();
-
-
+	public ConvertFactory(int width,int height){
+		this.mapWidth=width;
+		this.mapHeight=height;
 	}
 
 	/**
@@ -41,16 +40,17 @@ public class ConvertFactory {
 	 * @param gps- gps point
 	 * @return - pixel point
 	 */
-	public static Point3D GpsToPicsel(Point3D gps) {
+	public Point3D GpsToPicsel(Point3D gps) {
+		Point3D GPS=new Point3D();
 		// use offsets
-		gps.set_y( gps.y() - mapLongitudeStart);
+		GPS.set_y( gps.y() - mapLongitudeStart);
 		// do inverse because the latitude increases as we go up but the y decreases as we go up.
 		// if we didn't do the inverse then all the y values would be negative.
-		gps.set_x( mapLatitudeStart-gps.x());
+		GPS.set_x( mapLatitudeStart-gps.x());
 
 		// set x & y using conversion
-		int x = (int) (mapWidth*(gps.y()/mapLongitude));
-		int y = (int) (mapHeight*(gps.x()/mapLatitude));
+		int x = (int) (mapWidth*(GPS.y()/mapLongitude));
+		int y = (int) (mapHeight*(GPS.x()/mapLatitude));
 
 		return new Point3D(x, y);
 	}
@@ -59,11 +59,9 @@ public class ConvertFactory {
 	 * @param picsel
 	 * @return- gps point
 	 */
-	public static Point3D PicselToGps(Point3D picsel) {
-		//picsel.set_y(  picsel.y() );
-		//picsel.set_x( picsel.x());
+	public Point3D PicselToGps(Point3D picsel) {
 		double y= ((mapLongitude*picsel.x())/mapWidth)+mapLongitudeStart;
-		double x= ((mapLatitude*picsel.y() )/mapHeight)+mapLatitudeStart;
+		double x= -((mapLatitude*picsel.y() )/mapHeight)+mapLatitudeStart;
 		return new Point3D(x,y);
 	}
 	/**
@@ -73,20 +71,18 @@ public class ConvertFactory {
 	 * @param picsel1 - point 1
 	 * @return double of distance
 	 */
-	public static double distancePicsel(Point3D picsel0,Point3D picsel1) {
+	public double distancePicsel(Point3D picsel0,Point3D picsel1) {
 		MyCoords myCoords= new MyCoords();
-		Point3D gps0=PicselToGps(picsel0);
+		Point3D gps0= PicselToGps(picsel0);
 		Point3D gps1=PicselToGps(picsel1);
 		return myCoords.distance3d(gps0, gps1);			
 	}
-	public void setMyImg(BufferedImage myImg) {
-		this.myImg = myImg;
+	
+	public static double distanceGPS(Point3D picsel0,Point3D picsel1) {
+		MyCoords myCoords= new MyCoords();
+		return myCoords.distance3d(picsel0, picsel1);		
 	}
-	public Image getMyImg() {
-		return myImg;
-	}
+	
 	
 
 }
-
-

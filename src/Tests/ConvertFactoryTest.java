@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import Coords.ConvertFactory;
 import Coords.Map;
+import GUI.MyFrame;
 import Geom.Point3D;
 
 class ConvertFactoryTest {
@@ -18,6 +19,7 @@ class ConvertFactoryTest {
 	private  Point3D p1;
 	private Point3D p2;
 	private ConvertFactory conv;
+	
 	@Test
 	void testGpsToPicsel() {
 		Point3D answer= conv.GpsToPicsel(P);
@@ -39,6 +41,8 @@ class ConvertFactoryTest {
 	
 	@Test
 	void testdistancePicsel() {
+		//MyFrame my= new MyFrame();
+		//conv= new ConvertFactory(my.i);
 		double answer= conv.distancePicsel(p1,p2);
 		assertTrue(answer>49.8);
 		assertTrue(answer<50.1);

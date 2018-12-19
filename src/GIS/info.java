@@ -17,7 +17,7 @@ import Geom.Point3D;
  */
 public class info implements Meta_data{
 	private String type;
-	private Point3D point;
+	//private Point3D point;
 	private Date time;
 	private long UTC;
 	private int name;
@@ -34,9 +34,9 @@ public class info implements Meta_data{
 	 * @param type - The client's Internet connection type.
 	 * @throws ParseException - if the date time can't be convert.
 	 */
-	public info(String type,int name,Point3D point, int speed,int radiusEat ) throws ParseException{
+	public info(String type,int name, int speed,int radiusEat ) throws ParseException{
 		this.type=type;
-		this.point=point;
+		
 		this.name=name;
 		this.speed=speed;
 		this.radiusEat=radiusEat;
@@ -92,7 +92,7 @@ public class info implements Meta_data{
 	 * @throws ParseException 
 	 */
 	public info() throws ParseException {
-		this.point=new Point3D();
+	
 		this.name=0;
 		this.speed=0;
 		this.radiusEat=0;
@@ -104,7 +104,7 @@ public class info implements Meta_data{
 	
 
 	public info(info data) throws ParseException {
-		this(data.type,data.name,data.point,data.speed,data.radiusEat);
+		this(data.type,data.name,data.speed,data.radiusEat);
 	}
 
 	public void setType(String type) {
@@ -132,7 +132,7 @@ public class info implements Meta_data{
 	 */
 	@Override
 	public Point3D get_Orientation() { //Boaz told us to keep it NULL at this point.
-		return this.point;
+		return null;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class info implements Meta_data{
 	 */
 	@Override
 	public String toString() {
-		return  this.point+","+this.name+","+this.speed+","+this.radiusEat+","+this.UTC+","+this.time;
+		return this.name+","+this.speed+","+this.radiusEat+","+this.UTC+","+this.time;
 	}
 
 	/**
@@ -160,10 +160,7 @@ public class info implements Meta_data{
 	public void setName(int name) {
 		this.name=name;	}
 
-	public String get_Type() {
-		
-		return ""+this.getType();
-	}
+	
 
 	@Override
 	public int getSpeedweight() {
