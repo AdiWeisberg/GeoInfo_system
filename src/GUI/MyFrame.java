@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,7 +33,6 @@ import Geom.Point3D;
  */
 public class MyFrame extends JFrame implements MouseListener{
 	// private variables
-	private Graphics _paper;
 	private int x, y;
 	private static Game game;
 	private int isGamer;//1=pacman,2=fruit,3=run,4=save,5=Open
@@ -90,13 +88,9 @@ public class MyFrame extends JFrame implements MouseListener{
 		//		window.add(this);
 
 		// A menu-bar contains menus. A menu contains menu-items (or sub-Menu)
-		MenuBar menuBar;   // the menu-bar
-		Menu menu;         // each menu in the menu-bar
-
-		menuBar = new MenuBar();
+		 MenuBar menuBar = new MenuBar();
 		// First Menu
-		menu = new Menu("Menu");
-		//menu.setMnemonic(KeyEvent.VK_A);  // alt short-cut key
+		Menu menu = new Menu("Menu");
 		menuBar.add(menu);  // the menu-bar adds this menu
 		//***add dounts to game: 
 		menuItem1 = new MenuItem("Fruit");

@@ -19,9 +19,9 @@ public class Fruit  implements GIS_element{
 	private Point3D point;
 	private Meta_data data;
 	private ImageIcon img;
-
+	private boolean isEaten;
+	
 	public Fruit() {
-		this.img = new ImageIcon("icons//dount.jpg");
 	}
 
 	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
