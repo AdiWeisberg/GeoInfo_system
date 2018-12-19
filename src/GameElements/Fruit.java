@@ -18,7 +18,6 @@ public class Fruit  implements GIS_element{
 
 	private Point3D point;
 	private Meta_data data;
-	private ImageIcon img;
 	private boolean isEaten;
 	
 	public Fruit() {
@@ -50,12 +49,7 @@ public class Fruit  implements GIS_element{
 	public Point3D getPoint() {
 		return point;
 	}
-	public ImageIcon getImg() {
-		return img;
-	}
-	public void setImg(ImageIcon img) {
-		this.img = img;
-	}
+	
 	public void setPoint(Point3D point) {
 		this.point = point;
 	}
