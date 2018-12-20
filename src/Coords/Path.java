@@ -81,5 +81,9 @@ private ArrayList<Point3D>points;
 	public void setPoints(ArrayList<Point3D> points) {
 		this.points = points;
 	}
+	public void add(double x, double y, double z) {
+		Point3D temp= new Point3D(x,y,z);
+		this.points.add(temp);
+	}
 
 }
