@@ -25,23 +25,35 @@ public class Fruit  implements GIS_element{
 
 	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
 		this();
-		this.point=point;
+		this.point=new Point3D(point);
 		this.data=new info(type,name,weight,0);
+		this.isEaten=false;
 	}
 	public Fruit(Point3D p) throws ParseException {
 		this();
 		this.point=p;
 		data= new info("f",1,1,0);
+		this.isEaten=false;
 	}
 	public Fruit(Point3D point,Meta_data newData) {
 		this();
 		this.data=newData;
-		this.point=point;
+		this.point=new Point3D(point);
+		this.isEaten=false;
 	}
 	public Fruit(GIS_element fruit) {
 		this.point=fruit.getPoint();
 		this.data=fruit.getData();
+		this.isEaten=((Fruit) fruit).isEaten();
 	}
+	public boolean isEaten() {
+		return isEaten;
+	}
+
+	public void setEaten(boolean isEaten) {
+		this.isEaten = isEaten;
+	}
+
 	public void addMeta_data(Meta_data newData) {
 		this.data=newData;
 		this.point=newData.get_Orientation();
@@ -51,7 +63,7 @@ public class Fruit  implements GIS_element{
 	}
 	
 	public void setPoint(Point3D point) {
-		this.point = point;
+		this.point = new Point3D(point);
 	}
 
 	public Meta_data getData() {

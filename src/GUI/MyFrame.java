@@ -191,9 +191,21 @@ public class MyFrame extends JFrame implements MouseListener{
 
 		this.addMouseListener(this);
 	}
+	public Map getMap() {
+		return map;
+	}
+
+
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+
+
 	private void runPath() {
 		this.algo= new ShortestPathAlgo(this.game,this);
-		repaint();
+		//repaint();
 	}
 	private void openFile() {
 		int returnValue = openFileChosser.showOpenDialog(this);
@@ -212,7 +224,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		x = event.getX();
 		y = event.getY();
 		Point3D p=new Point3D(x,y,0);
-		Point3D P2= this.map.getCf().PicselToGps(p);
+		Point3D P2= this.map.getCf().PicselToGps(p,this.getWidth(), this.getHeight());
 		System.out.println("("+ P2.x() + "," + P2.y() +")");
 		//	_paper = this.getGraphics();
 		//_paper.setFont(new Font("Monospaced", Font.PLAIN, 14));   
@@ -224,7 +236,6 @@ public class MyFrame extends JFrame implements MouseListener{
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			System.out.println("hiii1");
 			this.getGraphics().drawImage(dountIcon, x,y, this);
 			repaint();
 		}
@@ -279,7 +290,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		System.out.println("mouse entered");
 	}
 
-	public void paint(Graphics g)
+	public synchronized void paint(Graphics g)
 	{
 		g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), this);
 
@@ -290,7 +301,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		//draw all the dounts to the screen: 
 		while(itr0.hasNext()) {
 			Fruit fruit = (Fruit)itr0.next();
-			Point3D p = this.map.getCf().GpsToPicsel(fruit.getPoint());
+			Point3D p = this.map.getCf().GpsToPicsel(fruit.getPoint(), this.getWidth(), this.getHeight());
 			g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
 			g.drawImage(dountIcon, (int)p.x(),(int) p.y(), this);
 		}
@@ -302,7 +313,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		while(itr1.hasNext()) 
 		{
 			Pacman pacman = (Pacman)itr1.next();
-			Point3D p = this.map.getCf().GpsToPicsel(new Point3D(pacman.getPoint()));
+			Point3D p = this.map.getCf().GpsToPicsel(new Point3D(pacman.getPoint()), this.getWidth(), this.getHeight());
 			System.out.println(p);
 			g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
 			g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
@@ -310,29 +321,29 @@ public class MyFrame extends JFrame implements MouseListener{
 		
 		System.out.println("****");
 		
-		if(isGamer==3) {
-		//draw all the Lines to the screen:
-		Iterator<Path> itr3 = algo.getPaths().iterator();
-		while(itr3.hasNext()) {
-			Path path = itr3.next();
-			Point3D start = this.map.getCf().GpsToPicsel(path.getPoints().get(0)); // start pacman
-			for(int i=1; i<path.size(); i++) {
-				Point3D end = this.map.getCf().GpsToPicsel(path.getPoints().get(i));
-				g.setColor(Color.PINK);
-				g.drawLine((int)start.x(), (int)start.y(), (int)end.x(), (int)end.y());
-				start.set_x(end.x());
-				start.set_y(end.y());
-				start.set_z(end.z());
-			}
-			}
+//		if(isGamer==3) {
+//		//draw all the Lines to the screen:
+//		Iterator<Path> itr3 = algo.getPaths().iterator();
+//		while(itr3.hasNext()) {
+//			Path path = itr3.next();
+//			Point3D start = this.map.getCf().GpsToPicsel(path.getPoints().get(0)); // start pacman
+//			for(int i=1; i<path.size(); i++) {
+//				Point3D end = this.map.getCf().GpsToPicsel(path.getPoints().get(i));
+//				g.setColor(Color.PINK);
+//				g.drawLine((int)start.x(), (int)start.y(), (int)end.x(), (int)end.y());
+//				start.set_x(end.x());
+//				start.set_y(end.y());
+//				start.set_z(end.z());
+//			}
+//			}
 			
 			//g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
 			//g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
 		}
 		//g2.dispose();
-		System.out.println("Number of pacmans: "+game.getPacmans().size());
+	//	System.out.println("Number of pacmans: "+game.getPacmans().size());
 
-	}
+	//}
 	public Image getPacmanIcon() {
 		return pacmanIcon;
 	}

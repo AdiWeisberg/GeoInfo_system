@@ -20,11 +20,11 @@ public class ConvertFactory {
 	//private BufferedImage myImg;
 	static  int mapWidth , mapHeight;
 	// offsets
-	static final double mapLongitudeStart =35.212405, mapLatitudeStart =32.106046 ;
+	static final double mapLongitudeStart =  35.202574, mapLatitudeStart = 32.106046;
 	// length of map in long/lat
-	static final double mapLongitude = 35.202574-mapLongitudeStart, 
+	static final double mapLongitude = 35.212405 -mapLongitudeStart, 
 			// invert because it decreases as you go down
-			mapLatitude = mapLatitudeStart -32.101858;
+			mapLatitude = mapLatitudeStart - 32.101858  ;
 
 	public Point3D startPoint = new Point3D(35.202574,32.106046);
 	public Point3D endPoint = new Point3D(35.212405,32.101858);
@@ -40,7 +40,7 @@ public class ConvertFactory {
 	 * @param gps- gps point
 	 * @return - pixel point
 	 */
-	public Point3D GpsToPicsel(Point3D gps) {
+	public Point3D GpsToPicsel(Point3D gps, double width, double height) {
 		Point3D GPS=new Point3D();
 		// use offsets
 		GPS.set_y( gps.y() - mapLongitudeStart);
@@ -49,8 +49,8 @@ public class ConvertFactory {
 		GPS.set_x( mapLatitudeStart-gps.x());
 
 		// set x & y using conversion
-		int x = (int) (mapWidth*(GPS.y()/mapLongitude));
-		int y = (int) (mapHeight*(GPS.x()/mapLatitude));
+		int x = (int) (width*(GPS.y()/mapLongitude));
+		int y = (int) (height*(GPS.x()/mapLatitude));
 
 		return new Point3D(x, y);
 	}
@@ -59,9 +59,9 @@ public class ConvertFactory {
 	 * @param picsel
 	 * @return- gps point
 	 */
-	public Point3D PicselToGps(Point3D picsel) {
-		double y= ((mapLongitude*picsel.x())/mapWidth)+mapLongitudeStart;
-		double x= -((mapLatitude*picsel.y() )/mapHeight)+mapLatitudeStart;
+	public Point3D PicselToGps(Point3D picsel, double width, double height) {
+		double y= ((mapLongitude*picsel.x())/width)+mapLongitudeStart;
+		double x= -((mapLatitude*picsel.y() )/height)+mapLatitudeStart;
 		return new Point3D(x,y);
 	}
 	/**
@@ -71,10 +71,10 @@ public class ConvertFactory {
 	 * @param picsel1 - point 1
 	 * @return double of distance
 	 */
-	public double distancePicsel(Point3D picsel0,Point3D picsel1) {
+	public double distancePicsel(Point3D picsel0,Point3D picsel1, int width, int height) {
 		MyCoords myCoords= new MyCoords();
-		Point3D gps0= PicselToGps(picsel0);
-		Point3D gps1=PicselToGps(picsel1);
+		Point3D gps0= PicselToGps(picsel0, width, height);
+		Point3D gps1=PicselToGps(picsel1, width, height);
 		return myCoords.distance3d(gps0, gps1);			
 	}
 	

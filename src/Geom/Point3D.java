@@ -8,12 +8,14 @@ public class Point3D implements Geom_element, Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private double _x,_y,_z;
+	private long timeStamp;
 
 	public Point3D(double x,double y,double z) 
 	{
 		_x=x;
 		_y=y;
 		_z=z;
+		this.timeStamp = 0;
 	}
 
 	public Point3D(Point3D p) 
@@ -21,11 +23,13 @@ public class Point3D implements Geom_element, Serializable
 		_x=p.x();
 		_y=p.y();
 		_z=p.z();
+		this.timeStamp = 0;
 	}
 	public Point3D() {
 		this._x=0;
 		this._y=0;
 		this._z=0;
+		this.timeStamp = 0;
 	}
 	
 	public void set_x(double _x) {
