@@ -20,9 +20,11 @@ public class Pacman implements GIS_element {
 	private Point3D point;
 	private Meta_data data;	
 	private int score;
-
+	private int ID; // id for each pacman
 
 	public Pacman() {
+		this.point = null;
+		this.score = 0;
 	}
 
 	public Pacman(Pacman p) throws ParseException {
@@ -33,23 +35,34 @@ public class Pacman implements GIS_element {
 		this();
 		data= new info(type,name,speed,radiusEat);
 		this.point = new Point3D(point);
-
+		this.ID = point.getID();
 	}
 	public Pacman(Point3D p) throws ParseException {
 		this();
 		this.point=new Point3D(p);
 		data= new info("p",1,1,1);
+		this.ID = p.getID();
 	}
 	public Pacman(GIS_element pacman) {
 		this();
 		this.point=new Point3D(pacman.getPoint());
 		this.data = pacman.getData();
+		this.ID = pacman.getData().getID();
 	}
 	public Pacman(Point3D point,Meta_data newData) {
 		this();
 		this.data=newData;
 		this.point=new Point3D(point);
+		this.ID = point.getID();
 	}
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
 	public void addMeta_data(Meta_data newData) {
 		this.data=newData;
 		this.point=newData.get_Orientation();

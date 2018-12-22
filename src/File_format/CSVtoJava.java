@@ -23,6 +23,7 @@ import Geom.Point3D;
  */
 
 public class CSVtoJava {
+	private int counter = -1;
 	//This class gets paths of csv path and convert it to GIS_layer(java class).
 	/**
 	 * This function takes the CSV path and read them into new layers for each CSV file. 
@@ -38,6 +39,8 @@ public class CSVtoJava {
 		//String filePath = itr.next();
 		String line = "";
 		String cvsSplitBy = ",";
+		
+
 		//ArrayList<Meta_data> newdata= new ArrayList<Meta_data>();
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) 
 		{
@@ -51,6 +54,7 @@ public class CSVtoJava {
 				//System.out.println(userInfo[0]+","+userInfo[1]+","+userInfo[2]+","+userInfo[3]+","+userInfo[4]+","+userInfo[5]);
 
 				Point3D p=new Point3D(Double.parseDouble(userInfo[2]),Double.parseDouble(userInfo[3]),Double.parseDouble(userInfo[4]));
+				p.setID(counter++);
 				info data =new info(userInfo[0],Integer.parseInt(userInfo[1]),Integer.parseInt(userInfo[5]),0);
 				if(userInfo.length>6) {
 					data.setRadiusEat(Integer.parseInt( userInfo[6]));

@@ -21,8 +21,10 @@ public class info implements Meta_data{
 	private Date time;
 	private long UTC;
 	private int name;
+	private int ID;
 	private int speed;
 	private int radiusEat;
+	private boolean isEaten;
 	static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
@@ -36,12 +38,13 @@ public class info implements Meta_data{
 	 */
 	public info(String type,int name, int speed,int radiusEat ) throws ParseException{
 		this.type=type;
-		
+		this.ID += 1;
 		this.name=name;
 		this.speed=speed;
 		this.radiusEat=radiusEat;
 		this.time = curTime2UTC();
 		this.UTC = time.getTime();
+		this.isEaten = false;
 	}
 
 	//Create time by computer time now.
@@ -99,9 +102,36 @@ public class info implements Meta_data{
 		//Date UTC = GMTtoUTC(time, -2);// this time fits to Israel summer time. 
 		this.time = curTime2UTC();
 		this.UTC = time.getTime();
+		this.ID += 1;
+		this.isEaten = false;
 	}
 
 	
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	
+	public int getID() {
+		return this.ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
 
 	public info(info data) throws ParseException {
 		this(data.type,data.name,data.speed,data.radiusEat);
@@ -174,6 +204,16 @@ public class info implements Meta_data{
 	@Override
 	public String getType() {
 		return type;
+	}
+
+	public void setEaten(boolean isEaten) {
+		this.isEaten = isEaten;
+	}
+	
+	@Override
+	public boolean isEaten() {
+		// TODO Auto-generated method stub
+		return isEaten;
 	}
 
 	

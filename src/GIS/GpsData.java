@@ -12,6 +12,7 @@ public class GpsData implements GIS_element{
 
 	private Point3D gpsPoint;
 	private Meta_data data;
+	private static int ID = -1;
 /**
  * A constructor that receives 3 numbers that document a point and information
  * @param _long - long y
@@ -23,6 +24,7 @@ public class GpsData implements GIS_element{
 	public	GpsData(double _long,double _lat,double _alt,info data) throws ParseException {
 		gpsPoint= new Point3D(_long, _lat,_alt);
 		this.data=new info(data);
+		this.ID++;
 	}
 	/**
 	 * A constructor that receives point3d that document a point and information
@@ -33,6 +35,7 @@ public class GpsData implements GIS_element{
 	public	GpsData(Point3D p,info data) throws ParseException {
 		this.data=new info(data);
 		gpsPoint= new Point3D(p.x(),p.y(),p.z());
+		this.ID = p.getID();
 	}
 	
 	/** An empty constructor
@@ -40,6 +43,7 @@ public class GpsData implements GIS_element{
 	public	GpsData() throws ParseException {
 		gpsPoint= new Point3D();
 		data= new info();
+		this.ID++;
 	}
 	
 	@Override
@@ -89,6 +93,18 @@ public class GpsData implements GIS_element{
 	/** Turns the information into one String @return String */
 	public String DataString() {
 		return data.toString();
+	}
+	@Override
+	public Point3D getPoint() {
+		return null;
+	}
+	@Override
+	public void setID(int iD) {
+		this.ID = iD;
+	}
+	@Override
+	public int getID() {
+		return this.ID;
 	}
 
 }

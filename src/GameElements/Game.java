@@ -18,12 +18,12 @@ public class Game{
 	private ArrayList<GIS_element> fruits;
 	private ArrayList<GIS_element> pacmans;
 	public Game(){
-		fruits=new ArrayList();
-		pacmans=new ArrayList();
+		fruits=new ArrayList<GIS_element>();
+		pacmans=new ArrayList<GIS_element>();
 	}
 	public Game(ArrayList<Fruit>fruits,ArrayList<Pacman>pacmans){
-		this.fruits=new ArrayList(fruits);
-		this.pacmans=new ArrayList(pacmans);
+		this.fruits=new ArrayList<GIS_element>(fruits);
+		this.pacmans=new ArrayList<GIS_element>(pacmans);
 	}
 /**
  * Takes a CSV file and turns it into a game

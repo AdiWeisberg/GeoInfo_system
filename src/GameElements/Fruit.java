@@ -19,6 +19,7 @@ public class Fruit  implements GIS_element{
 	private Point3D point;
 	private Meta_data data;
 	private boolean isEaten;
+	private int ID; // id for each fruit
 	
 	public Fruit() {
 	}
@@ -28,24 +29,36 @@ public class Fruit  implements GIS_element{
 		this.point=new Point3D(point);
 		this.data=new info(type,name,weight,0);
 		this.isEaten=false;
+		this.ID = point.getID();
 	}
 	public Fruit(Point3D p) throws ParseException {
 		this();
 		this.point=p;
 		data= new info("f",1,1,0);
 		this.isEaten=false;
+		this.ID = p.getID();
 	}
 	public Fruit(Point3D point,Meta_data newData) {
 		this();
 		this.data=newData;
 		this.point=new Point3D(point);
 		this.isEaten=false;
+		this.ID = point.getID();
 	}
 	public Fruit(GIS_element fruit) {
 		this.point=fruit.getPoint();
 		this.data=fruit.getData();
 		this.isEaten=((Fruit) fruit).isEaten();
+		this.ID = fruit.getID();
 	}
+	public int getID() {
+		return this.ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
 	public boolean isEaten() {
 		return isEaten;
 	}
@@ -83,5 +96,12 @@ public class Fruit  implements GIS_element{
 	public void translate(Point3D vec) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void set(Fruit fruit) {
+		this.data=fruit.data;
+		this.point=new Point3D (fruit.point);
+		this.isEaten=fruit.isEaten;
+		this.ID = fruit.getID();
 	}
 }

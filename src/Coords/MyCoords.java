@@ -36,8 +36,9 @@ public class MyCoords implements coords_converter  {
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		Point3D p=new Point3D(-gps1.x(),-gps1.y(),-gps1.z());
-		gps0.add(p);
-		Point3D ans= trans_gpsToMeter(gps0);
+		Point3D p1= new Point3D(gps0.x(),gps0.y(),gps0.z());
+		p1.add(p);
+		Point3D ans= trans_gpsToMeter(p1);
 		return ans;
 	}
 /**function azimuth_elevation_dist: Gets points and converts the distance between them to the cordenta
@@ -73,7 +74,7 @@ public class MyCoords implements coords_converter  {
 		return ans;
 	}
 	//protected function that calculates the azimuth, is taken from the following link-https://stackoverflow.com/questions/9457988/bearing-from-one-coordinate-to-another/29471137
-	protected static double bearing(double lat1, double lon1, double lat2, double lon2){
+	public static double bearing(double lat1, double lon1, double lat2, double lon2){
 		  double longitude1 = lon1;
 		  double longitude2 = lon2;
 		  double latitude1 = Math.toRadians(lat1);

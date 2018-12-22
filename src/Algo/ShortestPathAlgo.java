@@ -7,11 +7,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import Coords.ConvertFactory;
-import Coords.Map;
 import Coords.Path;
-import GIS.GIS_element;
 import GUI.MyFrame;
-import GUI.ThreadPacman;
 import GameElements.Fruit;
 import GameElements.Game;
 import GameElements.Pacman;
@@ -21,91 +18,89 @@ public class ShortestPathAlgo implements Set<Path> {
 	private ArrayList<Path> paths;
 	private Game game;
 	private MyFrame frame;
-	private ArrayList<Thread> tp;
+	private ArrayList<Fruit> fruit;
+	private ArrayList<Pacman> pacman;
 
 	public ShortestPathAlgo(Game game,MyFrame frame) {
 		this.frame=frame;
 		this.game=game;
-		paths= new ArrayList<Path>(game.getPacmans().size());
-		tp = new ArrayList<Thread>();
+		paths= new ArrayList<Path>();
+		fruit= new  ArrayList<Fruit>();
+		fruit.addAll((Collection<? extends Fruit>) game.getFruits());
+		pacman= new  ArrayList<Pacman>();
+		pacman.addAll((Collection<? extends Pacman>) game.getPacmans());
 		theFastestRoute();
 	}
+
 	public void theFastestRoute() {
 		System.out.println("Pacmans: "+game.getPacmans().size());
 		for(int i=0;i<(game.getPacmans().size());i++) {
-
 			//create path for each pacman
 			Path newPath=new Path();
-			newPath.add(game.getPacmans().get(i).getPoint().x(),game.getPacmans().get(i).getPoint().y(),0);
 			paths.add(newPath);
-
-			//create collection of threadpacmans and start the current thread: 
-			ThreadPacman tpacman=new ThreadPacman((Pacman)game.getPacmans().get(i), newPath, i,this);
-			tp.add(i,new Thread(tpacman));
-			tp.get(i).start();
+			paths.get(i).add(new Point3D(game.getPacmans().get(i).getPoint()));
 		}
-		System.out.println("Threads:"+tp.size());
+
 		//sort the pacman array from the quickest to the slowest. 
 		//time to end the algo
 		long t= System.currentTimeMillis();
-		long end = t+15000;
-		while(System.currentTimeMillis() < end&&game.getFruits().size()>0) {
-
-			//ArrayList<Integer> fruitIndex=new ArrayList<Integer>();
-			for(int i=0;i<(game.getPacmans().size())&&game.getFruits().size()<=0;i++) {
-				Fruit temp=	theNearestFruit((Pacman)game.getPacmans().get(i),paths.get(i).getPoints().get(paths.get(i).getPoints().size()-1));
-				//int theFaster= ifOtherPacmanIsMoreClose(temp,i);
-				paths.get(i).add(new Point3D(temp.getPoint()));
+		long end = t+90000; // minute and a half
+		Fruit temp=	new Fruit();
+		while((System.currentTimeMillis() < end)&&(fruit.size()>0)) {
+			for(int i=0;i<(game.getPacmans().size())&&(fruit.size()>0);i++) {
+				temp.set(theNearestFruit(pacman.get(i)));
+				paths.get(i).add(temp.getPoint());
+				fruit.remove(temp.getData().getName());
+				//Calculate the score.
 				((Pacman) game.getPacmans().get(i)).setScore(temp.getData().getSpeedweight());
 			}	
 		}
 		System.out.println(t);
 		for(int i=0;i<(game.getPacmans().size());i++) {
-
-			//create collection of threadpacmans and start the current thread: 
-			ThreadPacman tpacman=new ThreadPacman((Pacman)game.getPacmans().get(i), paths.get(i), i,this);
-			tp.add(i,new Thread(tpacman));
-			tp.get(i).start();
+			System.out.println(this.paths.get(i).toString());
+			
 		}
+
 	}
+	
+	
+	
 	/**
 	 *  who is the nearest fruit for this pacman.
 	 * @param pacman - the pacman.
 	 * @return Fruit.
 	 */
-	public synchronized Fruit theNearestFruit(Pacman pacman,Point3D path) {
+	public synchronized Fruit theNearestFruit(Pacman pacman) {
 		new ConvertFactory(frame.getWidth(),frame.getHeight());
-
-		Fruit nearest= new Fruit(game.getFruits().get(0));
+		Fruit nearest = new Fruit(this.fruit.get(0)); // set defult nearest fruit to the current pacman.
+		double TheBestTime=0;
 		//the index of the fruit in the ArrayList of fruits.
 		nearest.getData().setName(0);
-		double TheBestTime=(ConvertFactory.distanceGPS(path,nearest.getPoint())-pacman.getData().getRadius())/pacman.getData().getSpeedweight();
-		for(int i=1;i< game.getFruits().size() ;i++) {
-			if(!((Fruit) game.getFruits().get(i)).isEaten()) {
-				Fruit temp= new Fruit(game.getFruits().get(i));
-				double tempTime=((ConvertFactory.distanceGPS(path,temp.getPoint()))-pacman.getData().getRadius())/pacman.getData().getSpeedweight();
+		TheBestTime=(ConvertFactory.distanceGPS(pacman.getPoint(),nearest.getPoint())-pacman.getData().getRadius())/pacman.getData().getSpeedweight();
+		for(int i=1;i< this.fruit.size();i++) {
+			Fruit temp= new Fruit(this.fruit.get(i));
+			double tempTime=((ConvertFactory.distanceGPS(pacman.getPoint(),temp.getPoint()))-pacman.getData().getRadius())/pacman.getData().getSpeedweight();
+			if(tempTime<TheBestTime) {
+				nearest.set(temp);
+				nearest.getData().setName(i);
+			}
+		}
 
-				if(tempTime<TheBestTime) {
-					nearest.setData(temp.getData());
-					nearest.setPoint(temp.getPoint());
-					nearest.getData().setName(i);
-				}
-			}
-		}
-		((Fruit) game.getFruits().get(nearest.getData().getName())).setEaten(true);
+
 		return nearest;
-	}	
-	private int ifOtherPacmanIsMoreClose(Fruit fruit, int j) {
-		double thisPacman=(ConvertFactory.distanceGPS(paths.get(j).getPoints().get(paths.get(j).getPoints().size()-1),fruit.getPoint())-game.getPacmans().get(j).getData().getRadius())/game.getPacmans().get(j).getData().getSpeedweight();
-		for(int i=0;i<game.getPacmans().size();i++ ) {
-			double temPacman=(ConvertFactory.distanceGPS(paths.get(i).getPoints().get(paths.get(i).getPoints().size()-1),fruit.getPoint())-game.getPacmans().get(i).getData().getRadius())/game.getPacmans().get(i).getData().getSpeedweight();
-			if(temPacman<thisPacman) {
-				j=i;
-				thisPacman=temPacman;
-			}
-		}
-		return j;
 	}
+
+//	private int ifOtherPacmanIsMoreClose(Fruit fruit, int j) {
+//		double thisPacman=(ConvertFactory.distanceGPS(paths.get(j).getPoints().get(paths.get(j).getPoints().size()-1),fruit.getPoint())-game.getPacmans().get(j).getData().getRadius())/game.getPacmans().get(j).getData().getSpeedweight();
+//		for(int i=0;i<game.getPacmans().size();i++ ) {
+//			double temPacman=(ConvertFactory.distanceGPS(paths.get(i).getPoints().get(paths.get(i).getPoints().size()-1),fruit.getPoint())-game.getPacmans().get(i).getData().getRadius())/game.getPacmans().get(i).getData().getSpeedweight();
+//			if(temPacman<thisPacman) {
+//				j=i;
+//				thisPacman=temPacman;
+//			}
+//		}
+//		return j;
+//	}
 	public synchronized void addPathes(Path path, int i) {
 		paths.get(i).setPoints(path.getPoints());
 	}
@@ -121,12 +116,7 @@ public class ShortestPathAlgo implements Set<Path> {
 	public void setFrame(MyFrame frame) {
 		this.frame = frame;
 	}
-	public ArrayList<Thread> getTp() {
-		return tp;
-	}
-	public void setTp(ArrayList<Thread> tp) {
-		this.tp = tp;
-	}
+
 	public boolean isFruitLeft() {
 		return game.getFruits().size() > 0;
 	}
@@ -191,19 +181,20 @@ public class ShortestPathAlgo implements Set<Path> {
 	}
 	//main
 	public static void main(String[] args) throws ParseException {
-		//		Game game=new Game ();
-		//		game.csvToGame("test3\\game_1543684662657.csv");
-		//		// ShortestPathAlgo algo=new ShortestPathAlgo(game,this.fra);
-		//		 for(int i=0;i<algo.getPaths().size();i++) {
-		//			 System.out.println(i+1+": ");
-		//			 for(int j=0;j<algo.getPaths().get(i).getPoints().size();j++) {
-		//				 System.out.println();
-		//				 System.out.print(algo.getPaths().get(i).getPoints().get(j).x()+",");
-		//				 System.out.print(algo.getPaths().get(i).getPoints().get(j).y()+"."+j);
-		//			 }
-		//			 System.out.println(algo.getPaths().get(i).getPoints().size());
-		//			
-		//		 }
+		Game game=new Game ();
+		game.csvToGame("test3\\game_1543684662657.csv");
+		MyFrame frame=new MyFrame();
+		ShortestPathAlgo algo=new ShortestPathAlgo(game,frame);
+		for(int i=0;i<algo.getPaths().size();i++) {
+			System.out.println(i+1+": ");
+			for(int j=0;j<algo.getPaths().get(i).getPoints().size();j++) {
+				System.out.println();
+				System.out.print(algo.getPaths().get(i).getPoints().get(j).x()+",");
+				System.out.print(algo.getPaths().get(i).getPoints().get(j).y());
+			}
+			System.out.println(algo.getPaths().get(i).getPoints().size());
+
+		}
 	}
 
 }

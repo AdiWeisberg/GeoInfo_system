@@ -21,6 +21,7 @@ import java.util.Iterator;
 import Coords.ConvertFactory;
 import Coords.Map;
 import Coords.Path;
+import File_format.Path2KML;
 import GIS.GIS_element;
 import GameElements.Fruit;
 import GameElements.Game;
@@ -38,10 +39,12 @@ public class MyFrame extends JFrame implements MouseListener{
 	private int isGamer;//1=pacman,2=fruit,3=run,4=save,5=Open
 	private BufferedImage image;
 	private final JFileChooser openFileChosser;
-	private MenuItem menuItem1, menuItem2,menuItem3,menuItem4,menuItem5,menuItem6,menuItem7,menuItem8; // an item in a menu
+	private MenuItem menuItem1, menuItem2,menuItem3,menuItem4,menuItem5,menuItem6,menuItem7; // an item in a menu
 	private Image pacmanIcon, dountIcon;
 	private Map map;
 	private ShortestPathAlgo algo;
+	private ArrayList<Thread> tp;
+	private int counterP = -1, counterF = -1;
 
 	//private Map map;
 	//private final JFilesaver saveFile;
@@ -50,19 +53,12 @@ public class MyFrame extends JFrame implements MouseListener{
 		super("Panter Map!"); //setTitle("Map Counter");  // "super" Frame sets its title
 		this.map = new Map();
 		this.setBounds(0,0,this.getWidth(),this.getHeight()); //setSize(1433,700);        // "super" Frame sets its initial window size
-		//      Exit the program when the close-window button clicked
-		try {
-			this.image=map.getImg();
-			this.pacmanIcon = ImageIO.read(new File("icons\\pacman.jpg"));
-			this.dountIcon = ImageIO.read(new File("icons\\dount.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Can't read input file!");
-			System.exit(-1);
-		}
+		this.image=map.getImg();
+		this.pacmanIcon = Toolkit.getDefaultToolkit().getImage("icons\\pacman.jpg");
+		this.dountIcon = Toolkit.getDefaultToolkit().getImage("icons\\dount.jpg");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 
 		game =new Game();
 		openFileChosser= new JFileChooser();
@@ -70,7 +66,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		//openFileChosser.setFileFilter(new FileNameExtensionFilter("csv"));
 		//map=new Map();
 		//this.image=map.getImg();
-		
+
 		pack();
 	}
 
@@ -88,7 +84,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		//		window.add(this);
 
 		// A menu-bar contains menus. A menu contains menu-items (or sub-Menu)
-		 MenuBar menuBar = new MenuBar();
+		MenuBar menuBar = new MenuBar();
 		// First Menu
 		Menu menu = new Menu("Menu");
 		menuBar.add(menu);  // the menu-bar adds this menu
@@ -160,7 +156,8 @@ public class MyFrame extends JFrame implements MouseListener{
 				isGamer=6;
 				game.clearFruits();
 				game.clearPacman();
-				System.out.println("hiii4");
+				counterP = 0;
+				counterF = 0;
 				repaint();
 			}
 		});
@@ -172,16 +169,7 @@ public class MyFrame extends JFrame implements MouseListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isGamer=7;
-			}
-		});
-
-		//***illustration of game: 
-		menuItem8 = new MenuItem("run illustration");
-		menu.add(menuItem8); // the menu adds this item 
-		menuItem8.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				isGamer=8;
+				new Path2KML(algo.getPaths());
 			}
 		});
 
@@ -201,12 +189,29 @@ public class MyFrame extends JFrame implements MouseListener{
 		this.map = map;
 	}
 
-
-
+	//run the game 
 	private void runPath() {
-		this.algo= new ShortestPathAlgo(this.game,this);
-		//repaint();
+		this.algo= new ShortestPathAlgo(MyFrame.game,this);
+		//create collection of threadpacmans and start the current thread:
+		for(int i=0;i<(game.getPacmans().size());i++) {
+			ThreadPacman tpacman=new ThreadPacman((Pacman) algo.getGame().getPacmans().get(i), algo.getPaths().get(i),i,this.algo);
+			Thread t = new Thread(tpacman);
+			t.start();
+		}
 	}
+
+	public ArrayList<Thread> getTp() {
+		return tp;
+	}
+
+
+
+	public void setTp(ArrayList<Thread> tp) {
+		this.tp = tp;
+	}
+
+
+
 	private void openFile() {
 		int returnValue = openFileChosser.showOpenDialog(this);
 		if(returnValue==openFileChosser.APPROVE_OPTION) {
@@ -230,8 +235,11 @@ public class MyFrame extends JFrame implements MouseListener{
 		//_paper.setFont(new Font("Monospaced", Font.PLAIN, 14));   
 		if(isGamer==2){//fruit
 			Fruit fruit;
+			counterF++;
 			try {
 				fruit = new Fruit(P2);
+				fruit.getPoint().setID(counterF);
+				System.out.println("ID FRUIT: "+fruit.getID());
 				game.addFruit(fruit);
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -241,11 +249,11 @@ public class MyFrame extends JFrame implements MouseListener{
 		}
 
 		else if(isGamer==1) {//pacman
-			//p=new Point3D(x,y,0);
 			System.out.println(this.getWidth() +" , "+ this.getHeight());
 			Pacman pacman;
 			try {
 				pacman = new Pacman(P2);
+				pacman.getPoint().setID(counterP++);
 				game.addPacman(pacman);
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -259,7 +267,7 @@ public class MyFrame extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent event){
-		
+
 	}
 
 	private void saveAs() {
@@ -275,7 +283,6 @@ public class MyFrame extends JFrame implements MouseListener{
 		if (!file.getName().endsWith(".csv")) {
 			file = new File(file.getAbsolutePath() + ".csv");
 		}
-		BufferedWriter outFile = null;
 
 		//	outFile = new BufferedWriter(new FileWriter(file));
 		game.GameTocsv(file.getName());
@@ -309,7 +316,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		//draw all the pacman to the screen:
 
 		System.out.println("****");
-		
+
 		while(itr1.hasNext()) 
 		{
 			Pacman pacman = (Pacman)itr1.next();
@@ -318,29 +325,29 @@ public class MyFrame extends JFrame implements MouseListener{
 			g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
 			g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
 		}
-		
+
 		System.out.println("****");
-		
-//		if(isGamer==3) {
-//		//draw all the Lines to the screen:
-//		Iterator<Path> itr3 = algo.getPaths().iterator();
-//		while(itr3.hasNext()) {
-//			Path path = itr3.next();
-//			Point3D start = this.map.getCf().GpsToPicsel(path.getPoints().get(0)); // start pacman
-//			for(int i=1; i<path.size(); i++) {
-//				Point3D end = this.map.getCf().GpsToPicsel(path.getPoints().get(i));
-//				g.setColor(Color.PINK);
-//				g.drawLine((int)start.x(), (int)start.y(), (int)end.x(), (int)end.y());
-//				start.set_x(end.x());
-//				start.set_y(end.y());
-//				start.set_z(end.z());
-//			}
-//			}
-			
-			//g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
-			//g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
-		}
-		//g2.dispose();
+
+		//		if(isGamer==3) {
+		//		//draw all the Lines to the screen:
+		//		Iterator<Path> itr3 = algo.getPaths().iterator();
+		//		while(itr3.hasNext()) {
+		//			Path path = itr3.next();
+		//			Point3D start = this.map.getCf().GpsToPicsel(path.getPoints().get(0)); // start pacman
+		//			for(int i=1; i<path.size(); i++) {
+		//				Point3D end = this.map.getCf().GpsToPicsel(path.getPoints().get(i));
+		//				g.setColor(Color.PINK);
+		//				g.drawLine((int)start.x(), (int)start.y(), (int)end.x(), (int)end.y());
+		//				start.set_x(end.x());
+		//				start.set_y(end.y());
+		//				start.set_z(end.z());
+		//			}
+		//			}
+
+		//g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
+		//g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
+	}
+	//g2.dispose();
 	//	System.out.println("Number of pacmans: "+game.getPacmans().size());
 
 	//}

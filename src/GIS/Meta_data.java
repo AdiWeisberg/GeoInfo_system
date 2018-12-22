@@ -17,5 +17,8 @@ public interface Meta_data {
 	public String getType();
 	public int getSpeedweight();
 	public int getRadius();
+	public int getID();
+	public boolean isEaten();
+	public void setEaten(boolean isEaten);
 	public void setName(int name);
 }
