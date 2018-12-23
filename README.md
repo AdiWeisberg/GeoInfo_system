@@ -1,6 +1,6 @@
 # GeoInfo_system
 Geographic information system that collect information from CSV files and converts it to KML and display it on Google-Earth
-# what new?! you have play pacman game, you can run game of pacman and fruit and the algoritem will calculat the fastest routes!look at this in the GUI animation-run.
+# what new?! you have play pacman game, you can run game of pacman and fruit and the algoritem will calculat the fastest routes!look at this in the GUI animation-MyFrame-->open Game---->run.
  @author Naomi and Adi
 # packets_Details:
 1. Coords:
