@@ -49,12 +49,12 @@ public class ShortestPathAlgo implements Set<Path> {
 		while((System.currentTimeMillis() < end)&&(fruit.size()>0)) {
 			for(int i=0;i<(game.getPacmans().size())&&(fruit.size()>0);i++) {
 				temp.set(theNearestFruit(pacman.get(i)));
-				int j=ifOtherPacmanIsMoreClose(temp, i);
-				paths.get(j).add(temp.getPoint());
+				//int j=ifOtherPacmanIsMoreClose(temp, i);
+				paths.get(i).add(temp.getPoint());
 				fruit.remove(temp.getData().getName());
-				pacman.get(j).setPoint(temp.getPoint());
+				pacman.get(i).setPoint(temp.getPoint());
 				//Calculate the score.
-				((Pacman) game.getPacmans().get(j)).setScore(temp.getData().getSpeedweight());
+				((Pacman) game.getPacmans().get(i)).setScore(temp.getData().getSpeedweight());
 			}	
 		}
 		System.out.println(t);
@@ -96,19 +96,19 @@ public class ShortestPathAlgo implements Set<Path> {
 		return nearest;
 	}
 
-	private int ifOtherPacmanIsMoreClose(Fruit fruit, int j) {
-		double dis0=ConvertFactory.distanceGPS(paths.get(j).getPoints().get(paths.get(j).getPoints().size()-1),fruit.getPoint());
-		double thisPacman=(dis0)-game.getPacmans().get(j).getData().getRadius()/game.getPacmans().get(j).getData().getSpeedweight();
-		for(int i=0;i<game.getPacmans().size();i++ ) {
-			double dis1=ConvertFactory.distanceGPS(paths.get(i).getPoints().get(paths.get(i).getPoints().size()-1),fruit.getPoint());
-			double temPacman=(dis1)-game.getPacmans().get(i).getData().getRadius()/game.getPacmans().get(i).getData().getSpeedweight();
-			if(temPacman<thisPacman) {
-				j=i;
-				thisPacman=temPacman;
-			}
-		}
-		return j;
-	}
+//	private int ifOtherPacmanIsMoreClose(Fruit fruit, int j) {
+//		double dis0=ConvertFactory.distanceGPS(paths.get(j).getPoints().get(paths.get(j).getPoints().size()-1),fruit.getPoint());
+//		double thisPacman=(dis0)-game.getPacmans().get(j).getData().getRadius()/game.getPacmans().get(j).getData().getSpeedweight();
+//		for(int i=0;i<game.getPacmans().size();i++ ) {
+//			double dis1=ConvertFactory.distanceGPS(paths.get(i).getPoints().get(paths.get(i).getPoints().size()-1),fruit.getPoint());
+//			double temPacman=(dis1)-game.getPacmans().get(i).getData().getRadius()/game.getPacmans().get(i).getData().getSpeedweight();
+//			if(temPacman<thisPacman) {
+//				j=i;
+//				thisPacman=temPacman;
+//			}
+//		}
+//		return j;
+//	}
 	
 	public synchronized void addPathes(Path path, int i) {
 		paths.get(i).setPoints(path.getPoints());
