@@ -78,9 +78,9 @@ public class ConvertFactory {
 		return myCoords.distance3d(gps0, gps1);			
 	}
 	
-	public static double distanceGPS(Point3D picsel0,Point3D picsel1) {
+	public static double distanceGPS(Point3D gps0,Point3D gps1) {
 		MyCoords myCoords= new MyCoords();
-		return myCoords.distance3d(picsel0, picsel1);		
+		return myCoords.distance3d(gps0, gps1);		
 	}
 	
 	
