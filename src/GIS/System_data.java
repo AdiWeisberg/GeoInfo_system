@@ -93,18 +93,27 @@ public class System_data implements Meta_data{
 	}
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public int getSpeedweight() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
 	public int getRadius() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int getID() {
+		return 0;
+	}
+	@Override
+	public boolean isEaten() {
+		return false;
+	}
+	@Override
+	public void setEaten(boolean isEaten) {
+		
 	}
 
 }

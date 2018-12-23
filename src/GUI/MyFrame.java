@@ -56,6 +56,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		this.image=map.getImg();
 		this.pacmanIcon = Toolkit.getDefaultToolkit().getImage("icons\\pacman.jpg");
 		this.dountIcon = Toolkit.getDefaultToolkit().getImage("icons\\dount.jpg");
+		tp = new ArrayList<Thread>();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -117,6 +118,7 @@ public class MyFrame extends JFrame implements MouseListener{
 			public void actionPerformed(ActionEvent e) {
 				isGamer=3;
 				runPath();
+
 			}
 
 
@@ -142,7 +144,6 @@ public class MyFrame extends JFrame implements MouseListener{
 			public void actionPerformed(ActionEvent e) {
 				isGamer=5;
 				openFile();
-				System.out.println("hiii3");
 				repaint();
 			}
 		});
@@ -169,7 +170,16 @@ public class MyFrame extends JFrame implements MouseListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isGamer=7;
-				new Path2KML(algo.getPaths());
+				if(tp.size()>0) {
+					for(int i=0; i<tp.size();i++) {
+						try {
+							tp.get(i).join();
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}	
+					}
+					new Path2KML(algo.getPaths());
+				}
 			}
 		});
 

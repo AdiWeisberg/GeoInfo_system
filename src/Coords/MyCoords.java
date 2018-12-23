@@ -1,5 +1,7 @@
 package Coords;
 
+import java.util.Vector;
+
 import Geom.Point3D;
 /**
  * class that does calculations and conversions on points.
@@ -35,11 +37,13 @@ public class MyCoords implements coords_converter  {
  * @return Point3D vector in meters that are the distance.*/
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
-		Point3D p=new Point3D(-gps1.x(),-gps1.y(),-gps1.z());
-		Point3D p1= new Point3D(gps0.x(),gps0.y(),gps0.z());
-		p1.add(p);
-		Point3D ans= trans_gpsToMeter(p1);
-		return ans;
+	    double lonNorm= Math.cos(gps0.x()*Math.PI/180);
+		Point3D p1= new Point3D(gps1.x() - gps0.x(),gps1.y() -gps0.y());
+		double radian=(p1.x()*Math.PI)/180;
+		double meterX= Math.sin(radian)*EarthRadius;
+		 radian=(p1.y()*Math.PI)/180;
+		 double meterY= Math.sin(radian)*EarthRadius*lonNorm;
+		return new Point3D(meterX,meterY,p1.z());
 	}
 /**function azimuth_elevation_dist: Gets points and converts the distance between them to the cordenta
  * @param gps0 - gps point number  1
@@ -74,7 +78,7 @@ public class MyCoords implements coords_converter  {
 		return ans;
 	}
 	//protected function that calculates the azimuth, is taken from the following link-https://stackoverflow.com/questions/9457988/bearing-from-one-coordinate-to-another/29471137
-	public static double bearing(double lat1, double lon1, double lat2, double lon2){
+	protected static double bearing(double lat1, double lon1, double lat2, double lon2){
 		  double longitude1 = lon1;
 		  double longitude2 = lon2;
 		  double latitude1 = Math.toRadians(lat1);
@@ -85,5 +89,8 @@ public class MyCoords implements coords_converter  {
 
 		  return (Math.toDegrees(Math.atan2(y, x))+360)%360;
 		}
+	
+	
+	
 
 }
