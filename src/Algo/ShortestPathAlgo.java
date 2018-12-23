@@ -68,6 +68,22 @@ public class ShortestPathAlgo implements Set<Path> {
 	
 	
 	
+	public ArrayList<Fruit> getFruit() {
+		return fruit;
+	}
+
+	public void setFruit(ArrayList<Fruit> fruit) {
+		this.fruit = fruit;
+	}
+
+	public ArrayList<Pacman> getPacman() {
+		return pacman;
+	}
+
+	public void setPacman(ArrayList<Pacman> pacman) {
+		this.pacman = pacman;
+	}
+
 	/**
 	 *  who is the nearest fruit for this pacman.
 	 * @param pacman - the pacman.
