@@ -90,7 +90,7 @@ public class ShortestPathAlgo implements Set<Path> {
 	 * @return Fruit.
 	 */
 	public synchronized Fruit theNearestFruit(Pacman pacman) {
-		new ConvertFactory(frame.getWidth(),frame.getHeight());
+		new ConvertFactory();
 		Fruit nearest = new Fruit(this.fruit.get(0)); // set defult nearest fruit to the current pacman.
 		double TheBestTime=0;
 		//the index of the fruit in the ArrayList of fruits.

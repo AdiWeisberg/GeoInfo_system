@@ -8,18 +8,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Coords.Path;
 import GIS.*;
 import GUI.MyFrame;
+import GameElements.Fruit;
 import GameElements.Pacman;
 import Geom.Point3D;
 
 public class Path2KML {
 	private static int counter = 0;
-
-	public Path2KML(ArrayList<Path> paths) {
-		writeFile(paths, "newKML"+(counter++)+".kml");
+	private MyFrame frame;
+	public Path2KML(ArrayList<Path> paths,MyFrame frame, String fileName) {
+		writeFile(paths, fileName);
+		this.frame=frame;
 	}
 	/**
 	 * This function gets a geoPoint and returns it's Icon (based on the point's type).
@@ -54,55 +58,56 @@ public class Path2KML {
 
 		String kmlend = "</Document></kml>";
 		Iterator<Path> itr = pathes.iterator();
-		FileWriter fw;
+		FileWriter fw = null;
+		BufferedWriter bw = null;
 		try {
 			fw = new FileWriter(output);
-			BufferedWriter bw = new BufferedWriter(fw);
+			bw = new BufferedWriter(fw);
 		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} // path to the new address
+		}
 		while(itr.hasNext()) {
-			
-				String kmlStartlayer = "<Folder><name>"+pathes.get(index)+"</name>\n"+"<LineString>\n"+
-						"<LineStyle><color>ff0000ff</color>"+"<width>15</width>\n";
-				content.add(kmlStartlayer);
-				while(itr.hasNext()) {
-					Path currPath = itr.next();
-					String kmlelement = "<Folder><name>"+currPath.getName()+"</name>";
-					for(int i=0; i<currPath.size(); i++) {
-						GIS_element currPoint = (GIS_element) currPath.getPoints().get(i);
-						String GPSelement = currPoint.toString();
-						//					Image pointIcon = chooseIcon(currPoint); // choose Pacman or Dount Icon.
-						String[] gpsData =  GPSelement.split(","); // split by ','
-						//start building String of coordinates
-						kmlelement =
-								"<name>"+currPoint.getData().getName()+"</name>\n" +
-										"<TimeStamp><when>"+currPoint.getData().getUTC()+"</when></TimeStamp>"+
-										"<description>Type: <b>"+currPoint.getData().getType()+"</b><br/></description>\n"
-										+ //"<Style id=\"icon\"><IconStyle><Icon><href>"+pointIcon+"</href></Icon></IconStyle></Style>\r\n" + 
-										"<Point>\r\n" + 
-										"<coordinates>"+gpsData[0]+","+gpsData[1]+","+gpsData[2]+"</coordinates>" +
-										"</Point>\n" +
-										"</Placemark>\n";
-						content.add(kmlelement);
-					}
-				}
-				String kmlEndlayer = "</Folder>\n";
-				content.add(kmlEndlayer);
+			Path currPath = itr.next();
+			String kmlStartlayer = "<Folder><name>"+currPath.getPoints().get(0).getID()+"</name>\n"+
+					"<LineStyle><color>#ff0000ff</color>"+"<width>15</width>\n";
+			content.add(kmlStartlayer);
+			String kmlelement = "<Folder><Placemark><name>"+currPath.getName()+"</name>";
+			for(int i=0; i<currPath.size(); i++) {
+				Point3D currPoint = currPath.getPoints().get(i);
+				String GPSelement = currPoint.toString();
+				//					Image pointIcon = chooseIcon(currPoint); // choose Pacman or Dount Icon.
+				String[] gpsData =  GPSelement.split(","); // split by ','
+				//start building String of coordinates
 
+				kmlelement =
+						"<name>"+currPoint.getID()+"</name>\n" +
+								"<TimeStamp><when>"+currPoint.getTimeStamp()+"</when></TimeStamp>"+
+								//"<description>Type: <b>"+currPoint+"</b><br/></description>\n"
+								//+ "<Style id=\"icon\"><IconStyle><Icon><href>"+pointIcon+"</href></Icon></IconStyle></Style>\r\n"
+								"<Point>\n" + 
+								"<coordinates>\r"+gpsData[0]+","+gpsData[1]+","+gpsData[2]+"\n"+"</coordinates>" +
+								"</Point>\n" +
+								"</Placemark>\n";
+				content.add(kmlelement);
 			}
-			
-		
-		
-		content.add(kmlend);
+
+			String kmlEndlayer = "</LineStyle></Folder>\n";
+			content.add(kmlEndlayer);
+			content.add(kmlend);
+		}
 		String kml = content.toString().replace("[", "").replace("]", "");
 		try {
 			bw.write(kml);
 			bw.close();
+			System.out.println("Kml has been created! ");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
+
+
+
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import GUI.MyFrame;
 import Geom.Point3D;
 /**class ConvertFactor - Converts points from GPS to pixel and from pixel to gps,
  * and calculates distance between two pixel points (calculates distance on GPS).
@@ -30,9 +31,8 @@ public class ConvertFactory {
 	public Point3D endPoint = new Point3D(35.212405,32.101858);
 
 	/**constructor */
-	public ConvertFactory(int width,int height){
-		this.mapWidth=width;
-		this.mapHeight=height;
+	public ConvertFactory(){
+	
 	}
 
 	/**
@@ -83,6 +83,17 @@ public class ConvertFactory {
 		return myCoords.distance3d(gps0, gps1);		
 	}
 	
-	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Map();
+		MyFrame	my= new MyFrame();
+		ConvertFactory	conv= new ConvertFactory( );
+		Point3D P=new Point3D(32.102495,35.207462);
+		Point3D p1=new Point3D(720,544);
+		Point3D p2= new Point3D(672,598);
+		double answer= conv.distancePicsel(p1,p2,my.getWidth(),my.getHeight());
+
+		System.out.println(answer);
+	}
 
 }

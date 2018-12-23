@@ -34,7 +34,7 @@ public class Map{
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		this.cf = new ConvertFactory(img.getWidth(),img.getHeight());
+		this.cf = new ConvertFactory();
 	}
 
 	/**

@@ -170,18 +170,23 @@ public class MyFrame extends JFrame implements MouseListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isGamer=7;
-				if(tp.size()>0) {
-					for(int i=0; i<tp.size();i++) {
-						try {
-							tp.get(i).join();
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}	
-					}
-					new Path2KML(algo.getPaths());
-				}
+//				if(tp.size()>0) {
+//					for(int i=0; i<tp.size();i++) {
+//						try {
+//							tp.get(i).join();
+//						} catch (InterruptedException e1) {
+//							e1.printStackTrace();
+//						}	
+//					}
+				
+						createKML();
+					
+					
+//				}
 			}
 		});
+
+
 
 		setMenuBar(menuBar);  // "this" JFrame sets its menu-bar
 		// panel (source) fires the MouseEvent.
@@ -193,7 +198,23 @@ public class MyFrame extends JFrame implements MouseListener{
 		return map;
 	}
 
+	private void createKML() {
+		final JFileChooser saveAsFileChooser = new JFileChooser();
+		FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("kml File", "kml");
+		saveAsFileChooser.setFileFilter(extensionFilter);
+		int actionDialog = saveAsFileChooser.showOpenDialog(this);
+		if (actionDialog != JFileChooser.APPROVE_OPTION) {
+			return;
+		}
 
+		File file = saveAsFileChooser.getSelectedFile();
+		if (!file.getName().endsWith(".kml")) {
+			file = new File(file.getAbsolutePath() + ".kml");
+		}
+		
+		new Path2KML(algo.getPaths(),this, file.getName());
+		
+	}
 
 	public void setMap(Map map) {
 		this.map = map;

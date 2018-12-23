@@ -17,8 +17,9 @@ class TestShortestPathAlgo {
 	private ShortestPathAlgo algo;
 	private static MyFrame frame;
 	private static Game game;
-	
-	
+	/**
+	 * checks if we've got the right track for pacman 1.
+	 */
 	@Test
 	public void testTheFastestRoute() {
 		algo= new ShortestPathAlgo(game ,frame);
@@ -34,43 +35,11 @@ class TestShortestPathAlgo {
 		//4
 		assertTrue(algo.getPaths().get(0).getPoints().get(3).x()>=32.1031039626168);
 		assertTrue(algo.getPaths().get(0).getPoints().get(3).y()>=35.2095579204466);
-
-	
 	}
-//	@Test
-//	public void tesTheNearestFruit() {
-//		Fruit fruit = algo.theNearestFruit(algo.getPacman().get(0));
-//		assertTrue(fruit.getPoint().x()>=32.1040172336448);
-//		assertTrue(fruit.getPoint().y()>=35.2049271284019);
-//
-//		
-//		
-//		
-//	}
-//	@Test
-//	public void testIfOtherPacmanIsMoreClose() {
-//		
-//	}
-
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
 	@BeforeEach
 	void setUp() throws Exception {
 		game =new Game ();
 		game.csvToGame("Test.csv");
 		 frame=new MyFrame();	
 	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
-	
 }

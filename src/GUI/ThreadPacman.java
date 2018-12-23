@@ -31,7 +31,7 @@ public class ThreadPacman implements Runnable{
 		this.startTime = 0;
 		this.endTime = 0;
 		this.walkPath = new Path();
-		this.cf = new ConvertFactory(algo.getFrame().getWidth(),algo.getFrame().getHeight()); //for the convert of the timestamp to UTC time
+		this.cf = new ConvertFactory(); //for the convert of the timestamp to UTC time
 
 	}
 

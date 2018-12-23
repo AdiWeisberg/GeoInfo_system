@@ -14,42 +14,48 @@ import GUI.MyFrame;
 import Geom.Point3D;
 
 class ConvertFactoryTest {
-	
+
 	private Point3D P;
 	private  Point3D p1;
 	private Point3D p2;
-	private ConvertFactory conv;
-	
+	private static ConvertFactory conv;
+	private static  MyFrame my;
+	public ConvertFactoryTest() {
+		new Map();
+		my= new MyFrame();
+		conv= new ConvertFactory( );
+	}
+
 	@Test
 	void testGpsToPicsel() {
-		Point3D answer= conv.GpsToPicsel(P);
-		assertTrue(answer.x()<720.1);
-		assertTrue(answer.x()>719.9);
-		assertTrue(answer.y()<544.1);
-		assertTrue(answer.y()>543.9);
+		Point3D answer= conv.GpsToPicsel(P,my.getWidth(),my.getHeight());
+		assertTrue(answer.x()<=98.0);
+		assertTrue(answer.x()>97.0);
+		assertTrue(answer.y()<=47.0);
+		assertTrue(answer.y()>46.0);
 		assertTrue(answer.z()==0.0);
 	}
 	@Test
 	void testPicselToGps() {
-		Point3D answer= conv.PicselToGps(p1);
+
+		Point3D answer= conv.PicselToGps(p1,my.getWidth(),my.getHeight());
 		assertTrue(answer.x()>32.0);
 		assertTrue(answer.x()<32.12);
 		assertTrue(answer.y()>35.1);
 		assertTrue(answer.y()<35.25);
 		assertTrue(answer.z()==0.0);
 	}
-	
+
 	@Test
 	void testdistancePicsel() {
-		//MyFrame my= new MyFrame();
-		//conv= new ConvertFactory(my.i);
-		double answer= conv.distancePicsel(p1,p2);
-		assertTrue(answer>49.8);
-		assertTrue(answer<50.1);
+
+		double answer= conv.distancePicsel(p1,p2,my.getWidth(),my.getHeight());
+		assertTrue(answer>502.0);
+		assertTrue(answer<=502.07980840537573);
 	}
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		 new Map();
+	
 	}
 
 	@AfterAll
