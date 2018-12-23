@@ -13,9 +13,9 @@ import GIS.info;
 import GameElements.Fruit;
 import GameElements.Game;
 import GameElements.Pacman;
-/**
+/**class JavaToCSV - convert game in java to csv file.
  * link- https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/
- * @author n&e
+ * @author Naomi and Adi
  *
  */
 public class JavaToCSV {

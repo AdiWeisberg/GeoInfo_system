@@ -11,7 +11,16 @@ public class Point3D implements Geom_element, Serializable
 	 * This class represents a 3D point in space.
 	 */
 	private double _x,_y,_z;
-	private long timeStamp;
+	private String timeStamp;//endTime
+	private String startTime;
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
 	private int ID = -1;
 
 	public Point3D(double x,double y,double z) 
@@ -19,7 +28,7 @@ public class Point3D implements Geom_element, Serializable
 		_x=x;
 		_y=y;
 		_z=z;
-		this.timeStamp = 0;
+		this.timeStamp = "";
 		this.ID += 1;
 	}
 
@@ -28,14 +37,14 @@ public class Point3D implements Geom_element, Serializable
 		_x=p.x();
 		_y=p.y();
 		_z=p.z();
-		this.timeStamp = 0;
+		this.timeStamp = p.getTimeStamp();
 		this.ID = p.getID();
 	}
 	public Point3D() {
 		this._x=0;
 		this._y=0;
 		this._z=0;
-		this.timeStamp = 0;
+		this.timeStamp ="";
 		this.ID++;
 	}
 
@@ -54,11 +63,11 @@ public class Point3D implements Geom_element, Serializable
 	public Point3D(double x,double y) //Point2D
 	{this(x,y,0);}
 
-	public long getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(long timeStamp) {
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
@@ -114,13 +123,12 @@ public class Point3D implements Geom_element, Serializable
 	}
 
 	//Create time by computer time now.
-	public long curTime2UTC() throws ParseException { // based on Israel Summer time.
+	public String curTime2UTC() throws ParseException { // based on Israel Summer time.
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
 		cal.add(Calendar.HOUR_OF_DAY, -2);
 		String UTC = sdf.format(cal.getTime());
-		Date date = sdf.parse(UTC);
-		return date.getTime();
+		return UTC;
 	}
 
 	public boolean equals(Point3D p2)

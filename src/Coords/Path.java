@@ -7,13 +7,17 @@ import java.util.Set;
 
 import GIS.GIS_element;
 import Geom.Point3D;
-
+/**
+ * function Path- represents an array of points with a name and counts the amount of dispositionsof the class created.
+ * @author Naomi and Adi
+ *
+ */
 public class Path implements Set<Point3D>{
 
 	private ArrayList<Point3D>points;
 	private int name;
 	private static int counter;
-
+/**Contractor*/
 	public Path() {
 		points= new ArrayList<Point3D>();
 		this.name = counter++;

@@ -13,17 +13,29 @@ import GIS.Meta_data;
 import GIS.info;
 import Geom.Geom_element;
 import Geom.Point3D;
-
+/**class Fruit- represent a object whit gps point, data(time) and id.
+ * @author Naomi and Adi
+ *
+ */
 public class Fruit  implements GIS_element{
 
 	private Point3D point;
 	private Meta_data data;
 	private boolean isEaten;
 	private int ID; // id for each fruit
-	
+	/** empty contractor*/
 	public Fruit() {
 	}
-
+/**
+ * Contractor
+ * @param type- "f"/"F".
+ * @param name - the index in the array.
+ * @param point- gps point.
+ * @param weight- weight of the fruit.
+ * @param time -null
+ * @param radius
+ * @throws ParseException- for the time
+ */
 	public Fruit(String type,int name,Point3D point, int weight ,String time,int radius) throws ParseException{
 		this();
 		this.point=new Point3D(point);
@@ -31,6 +43,9 @@ public class Fruit  implements GIS_element{
 		this.isEaten=false;
 		this.ID = point.getID();
 	}
+	/** copy contractor
+	 * @param p- other Point
+	 * @throws ParseException -for the time */
 	public Fruit(Point3D p) throws ParseException {
 		this();
 		this.point=p;
@@ -38,6 +53,7 @@ public class Fruit  implements GIS_element{
 		this.isEaten=false;
 		this.ID = p.getID();
 	}
+	/**contractor*/
 	public Fruit(Point3D point,Meta_data newData) {
 		this();
 		this.data=newData;
@@ -45,6 +61,7 @@ public class Fruit  implements GIS_element{
 		this.isEaten=false;
 		this.ID = point.getID();
 	}
+	/**interface copy contractor*/
 	public Fruit(GIS_element fruit) {
 		this.point=fruit.getPoint();
 		this.data=fruit.getData();

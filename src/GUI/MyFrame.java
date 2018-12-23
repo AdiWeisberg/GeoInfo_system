@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,10 +33,19 @@ import GameElements.Pacman;
 import Geom.Point3D;
 
 /**
- *
- * @author 
+ *GUI for all the options in the project EX3.
+ *the options are:
+ *-add pacman on the map
+ *-add fruit on the map
+ *-run the game by the algoritem and threads that do simulation.
+ *-save csv file(game file).
+ *-open csv file
+ *-clear the game from fruit and pacman.
+ *-save a finished game to kml file
+ * @Naomi and Adi 
  */
 public class MyFrame extends JFrame implements MouseListener{
+
 	// private variables
 	private int x, y;
 	private static Game game;
@@ -45,10 +58,10 @@ public class MyFrame extends JFrame implements MouseListener{
 	private ShortestPathAlgo algo;
 	private ArrayList<Thread> tp;
 	private int counterP = -1, counterF = -1;
-
-	//private Map map;
-	//private final JFilesaver saveFile;
-
+	private long startTime;
+	/**
+	 * Contractor 
+	 */
 	public MyFrame(){
 		super("Panter Map!"); //setTitle("Map Counter");  // "super" Frame sets its title
 		this.map = new Map();
@@ -57,6 +70,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		this.pacmanIcon = Toolkit.getDefaultToolkit().getImage("icons\\pacman.jpg");
 		this.dountIcon = Toolkit.getDefaultToolkit().getImage("icons\\dount.jpg");
 		tp = new ArrayList<Thread>();
+		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -72,7 +86,7 @@ public class MyFrame extends JFrame implements MouseListener{
 	}
 
 
-
+	/**function createGui-creates the menu and directs each click on the menu for their actions. */
 	public void createGui(){              				
 		//	A Container is a component  that can contain other GUI components
 		//		window = this.getContentPane(); 
@@ -170,24 +184,21 @@ public class MyFrame extends JFrame implements MouseListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isGamer=7;
-//				if(tp.size()>0) {
-//					for(int i=0; i<tp.size();i++) {
-//						try {
-//							tp.get(i).join();
-//						} catch (InterruptedException e1) {
-//							e1.printStackTrace();
-//						}	
-//					}
-				
-						createKML();
-					
-					
-//				}
+				//				if(tp.size()>0) {
+				//					for(int i=0; i<tp.size();i++) {
+				//						try {
+				//							tp.get(i).join();
+				//						} catch (InterruptedException e1) {
+				//							e1.printStackTrace();
+				//						}	
+				//					}
+
+				createKML();
+
+
+				//				}
 			}
 		});
-
-
-
 		setMenuBar(menuBar);  // "this" JFrame sets its menu-bar
 		// panel (source) fires the MouseEvent.
 		//	panel adds "this" object as a MouseEvent listener.
@@ -211,9 +222,9 @@ public class MyFrame extends JFrame implements MouseListener{
 		if (!file.getName().endsWith(".kml")) {
 			file = new File(file.getAbsolutePath() + ".kml");
 		}
-		
+
 		new Path2KML(algo.getPaths(),this, file.getName());
-		
+
 	}
 
 	public void setMap(Map map) {
@@ -224,6 +235,7 @@ public class MyFrame extends JFrame implements MouseListener{
 	private void runPath() {
 		this.algo= new ShortestPathAlgo(MyFrame.game,this);
 		//create collection of threadpacmans and start the current thread:
+		this.startTime = new Date().getTime();
 		for(int i=0;i<(game.getPacmans().size());i++) {
 			ThreadPacman tpacman=new ThreadPacman((Pacman) algo.getGame().getPacmans().get(i), algo.getPaths().get(i),i,this.algo);
 			Thread t = new Thread(tpacman);
@@ -252,7 +264,9 @@ public class MyFrame extends JFrame implements MouseListener{
 			}
 		}
 	}
-
+	/**
+	 * if click on adding a pacman or fruit to the map it adds the objects to the game array and calls to the paint.
+	 */
 	@Override
 	public void mousePressed(MouseEvent event) {
 		System.out.println("mouse Clicked");
@@ -262,14 +276,13 @@ public class MyFrame extends JFrame implements MouseListener{
 		Point3D p=new Point3D(x,y,0);
 		Point3D P2= this.map.getCf().PicselToGps(p,this.getWidth(), this.getHeight());
 		System.out.println("("+ P2.x() + "," + P2.y() +")");
-		//	_paper = this.getGraphics();
-		//_paper.setFont(new Font("Monospaced", Font.PLAIN, 14));   
 		if(isGamer==2){//fruit
 			Fruit fruit;
 			counterF++;
 			try {
 				fruit = new Fruit(P2);
 				fruit.getPoint().setID(counterF);
+				fruit.getPoint().setStartTime(calcTime());
 				System.out.println("ID FRUIT: "+fruit.getID());
 				game.addFruit(fruit);
 			} catch (ParseException e) {
@@ -293,6 +306,16 @@ public class MyFrame extends JFrame implements MouseListener{
 			repaint();
 		}
 	}
+	public long getStartTime() {
+		return startTime;
+	}
+
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+
 	@Override
 	public void mouseReleased(MouseEvent event){}
 
@@ -301,6 +324,14 @@ public class MyFrame extends JFrame implements MouseListener{
 
 	}
 
+	public String calcTime() {
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		String formatDateTime = now.format(formatter);
+		return formatDateTime;
+	}
+
+	//opens a save window that allows you to choose a name and location(the diful location is in the project file) for a file.
 	private void saveAs() {
 		final JFileChooser saveAsFileChooser = new JFileChooser();
 		FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("csv File", "csv");
@@ -327,7 +358,7 @@ public class MyFrame extends JFrame implements MouseListener{
 	public void mouseEntered(MouseEvent event){
 		System.out.println("mouse entered");
 	}
-
+	/** function paint- goes over the arrays of the fruits and the pacmens and draws them. Work even when you: delete object,move the screen,run a game simulation. */
 	public synchronized void paint(Graphics g)
 	{
 		g.drawImage(image, 0, 0,this.getWidth(),this.getHeight(), this);
@@ -358,30 +389,7 @@ public class MyFrame extends JFrame implements MouseListener{
 		}
 
 		System.out.println("****");
-
-		//		if(isGamer==3) {
-		//		//draw all the Lines to the screen:
-		//		Iterator<Path> itr3 = algo.getPaths().iterator();
-		//		while(itr3.hasNext()) {
-		//			Path path = itr3.next();
-		//			Point3D start = this.map.getCf().GpsToPicsel(path.getPoints().get(0)); // start pacman
-		//			for(int i=1; i<path.size(); i++) {
-		//				Point3D end = this.map.getCf().GpsToPicsel(path.getPoints().get(i));
-		//				g.setColor(Color.PINK);
-		//				g.drawLine((int)start.x(), (int)start.y(), (int)end.x(), (int)end.y());
-		//				start.set_x(end.x());
-		//				start.set_y(end.y());
-		//				start.set_z(end.z());
-		//			}
-		//			}
-
-		//g.drawString("("+Integer.toString(x)+", "+Integer.toString(y)+")",x,y-10);
-		//g.drawImage(pacmanIcon, (int)p.x(),(int) p.y(), this);
 	}
-	//g2.dispose();
-	//	System.out.println("Number of pacmans: "+game.getPacmans().size());
-
-	//}
 	public Image getPacmanIcon() {
 		return pacmanIcon;
 	}
@@ -397,6 +405,8 @@ public class MyFrame extends JFrame implements MouseListener{
 	public void setDountIcon(Image dountIcon) {
 		this.dountIcon = dountIcon;
 	}
+
+
 
 	public static void main(String[] args) {
 		MyFrame f = new MyFrame();

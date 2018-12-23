@@ -13,7 +13,10 @@ import GameElements.Fruit;
 import GameElements.Game;
 import GameElements.Pacman;
 import Geom.Point3D;
-
+/**class ShortestPathAlgo - 
+ * @author Naomi and Adi
+ *
+ */
 public class ShortestPathAlgo implements Set<Path> {
 	private ArrayList<Path> paths;
 	private Game game;

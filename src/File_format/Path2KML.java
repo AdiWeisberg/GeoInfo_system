@@ -21,6 +21,7 @@ import Geom.Point3D;
 public class Path2KML {
 	private static int counter = 0;
 	private MyFrame frame;
+	
 	public Path2KML(ArrayList<Path> paths,MyFrame frame, String fileName) {
 		writeFile(paths, fileName);
 		this.frame=frame;
@@ -47,16 +48,19 @@ public class Path2KML {
 	public void writeFile(ArrayList<Path> pathes, String output) {
 		ArrayList<String> content = new ArrayList<String>(); // the content in long String
 		String kmlstart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
-				"<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"	
-				//				+"<Style id=\"red\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href>"
-				//				+"</Icon></IconStyle></Style><Style id=\"yellow\"><IconStyle>"
-				//				+"<Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon>"
-				//				+"</IconStyle></Style><Style id=\"green\"><IconStyle><Icon>"
-				//	+"<href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style>"
+				"<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"+
+				//"<TimeStamp>"+"<begin>"+pathes.get(0).getPoints().get(0).getTimeStamp()+"</begin><end>"+
+				//pathes.get(pathes.size()-1).getPoints().get(pathes.size()-1).getTimeStamp()+"</end></TimeStamp>"+
+				"<Folder>"	
+				+"<Style id=\"pac\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href>"
+				+"</Icon></IconStyle></Style><Style id=\"yellow\"><IconStyle>"
+				+"<Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon>"
+				+"</IconStyle></Style><Style id=\"green\"><IconStyle><Icon>"
+				+"<href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style>"
 				+"<name>GeoLayer</name>";
 		content.add(kmlstart);
 
-		String kmlend = "</Document></kml>";
+		String kmlend = "</Folder></Document></kml>";
 		Iterator<Path> itr = pathes.iterator();
 		FileWriter fw = null;
 		BufferedWriter bw = null;
@@ -69,34 +73,27 @@ public class Path2KML {
 		}
 		while(itr.hasNext()) {
 			Path currPath = itr.next();
-			String kmlStartlayer = "<Folder><name>"+currPath.getPoints().get(0).getID()+"</name>\n"+
-					"<LineStyle><color>#ff0000ff</color>"+"<width>15</width>\n";
+			String kmlStartlayer = "<name>"+currPath.getPoints().get(0).getID()+"</name>\n";
 			content.add(kmlStartlayer);
-			String kmlelement = "<Folder><Placemark><name>"+currPath.getName()+"</name>";
 			for(int i=0; i<currPath.size(); i++) {
 				Point3D currPoint = currPath.getPoints().get(i);
-				String GPSelement = currPoint.toString();
+				String kmlelement = "<name>"+currPoint.getID()+"</name>";
 				//					Image pointIcon = chooseIcon(currPoint); // choose Pacman or Dount Icon.
-				String[] gpsData =  GPSelement.split(","); // split by ','
 				//start building String of coordinates
-
+                     System.out.println(currPoint.getTimeStamp());
 				kmlelement =
-						"<name>"+currPoint.getID()+"</name>\n" +
-								"<TimeStamp><when>"+currPoint.getTimeStamp()+"</when></TimeStamp>"+
+						"<Placemark><TimeStamp><begin>"+frame.getStartTime()+"</begin><end>"+currPoint.getTimeStamp()+"</end></TimeStamp>"+
 								//"<description>Type: <b>"+currPoint+"</b><br/></description>\n"
 								//+ "<Style id=\"icon\"><IconStyle><Icon><href>"+pointIcon+"</href></Icon></IconStyle></Style>\r\n"
-								"<Point>\n" + 
-								"<coordinates>\r"+gpsData[0]+","+gpsData[1]+","+gpsData[2]+"\n"+"</coordinates>" +
-								"</Point>\n" +
-								"</Placemark>\n";
+								"<styleUrl>#pac</styleUrl>\n" + 
+								"<Point>"+"<coordinates>"+currPoint.y()+","+currPoint.x()+","+currPoint.z()+"\n"+"</coordinates>" +
+								"</Point></Placemark\n>";
 				content.add(kmlelement);
 			}
 
-			String kmlEndlayer = "</LineStyle></Folder>\n";
-			content.add(kmlEndlayer);
-			content.add(kmlend);
 		}
-		String kml = content.toString().replace("[", "").replace("]", "");
+		content.add(kmlend);
+		String kml = content.toString().replace("[", "").replace("]", "").replace(", ", "");
 		try {
 			bw.write(kml);
 			bw.close();

@@ -13,20 +13,36 @@ import GIS.Meta_data;
 import GIS.info;
 import Geom.Geom_element;
 import Geom.Point3D;
-
+/**class Pacman- represent a object whit gps point, data(time), score and id.
+ * @author Naomi and Adi*/
 public class Pacman implements GIS_element {
-
 
 	private Point3D point;
 	private Meta_data data;	
 	private int score;
 	private int ID; // id for each pacman
-
+	private String startTime;
+	private String endTime;
+public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+/** empty contractor*/
 	public Pacman() {
 		this.point = null;
 		this.score = 0;
 	}
-
+/** copy contractor
+ * @param p- other pacman
+ * @throws ParseException- if the creating time did not work. */
 	public Pacman(Pacman p) throws ParseException {
 		this(p.getPoint());
 	}

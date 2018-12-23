@@ -53,13 +53,6 @@ public class Map{
 		this.img = img;
 	}
 
-	public static void main(String[] args) {
-//		Map map = new Map(); // creates Default map.
-//		Point3D P=new Point3D(32.00,35.00);
-//		System.out.println(map.getCf().GpsToPicsel(P));
-		
-
-	}
 	/**
 	 * This function returns a ConvertFactory object.
 	 * @return cf - object that helps this class to handle coords Conversions.

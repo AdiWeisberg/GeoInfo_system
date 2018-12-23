@@ -1,423 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>GeoLayer</name>, <Folder><name>4</name>
-<LineStyle><color>#ff0000ff</color><width>15</width>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10401723364486,35.204927128401955,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10400926064382,35.2050368953245,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10400128764278,35.20514666224703,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10399331464175,35.205256429169566,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10398534164071,35.205366196092115,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10397736863966,35.205475963014656,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10396939563863,35.2055857299372,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10396142263759,35.20569549685973,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103953449636556,35.205805263782274,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103945476635516,35.20591503070481,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10393750363447,35.20602479762735,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10392953063344,35.2061345645499,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.1039215576324,35.20624433147244,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10391358463136,35.206354098394975,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103905611630324,35.20646386531752,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10389763862928,35.20657363224006,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103889665628245,35.20668339916259,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.1038816926272,35.206793166085134,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103873719626165,35.206902933007676,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103873719626165,35.206902933007676,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10385606816932,35.20700826082673,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10383841671248,35.20711358864578,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103820765255634,35.20721891646484,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10380311379879,35.207324244283896,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10378546234194,35.20742957210295,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.1037678108851,35.207534899922,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10375015942826,35.20764022774106,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103732507971415,35.207745555560116,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103714856514564,35.20785088337917,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10369720505772,35.20795621119822,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103679553600884,35.20806153901728,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10366190214404,35.208166866836336,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10364425068719,35.208272194655386,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103626599230346,35.20837752247445,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.1036089477735,35.20848285029349,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103591296316665,35.20858817811255,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103573644859814,35.208693505931606,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.103573644859814,35.208693505931606,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10352145794393,35.20878955198883,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10346927102804,35.20888559804606,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10341708411215,35.208981644103275,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10336489719626,35.2090776901605,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10331271028037,35.20917373621772,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10326052336448,35.209269782274944,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.1032083364486,35.20936582833216,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10315614953271,35.20946187438939,0.0
-</coordinates></Point>
-</Placemark>
-, <name>4</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>4 32.10310396261682,35.20955792044661,0.0
-</coordinates></Point>
-</Placemark>
-, </LineStyle></Folder>
-, </Document></kml>, <Folder><name>5</name>
-<LineStyle><color>#ff0000ff</color><width>15</width>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.1029278317757,35.20512608094906,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102933992731046,35.20523203652012,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.1029401536864,35.20533799209118,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10294631464174,35.205443947662246,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10295247559709,35.205549903233305,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10295863655244,35.20565585880437,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10296479750779,35.205761814375435,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10297095846314,35.205867769946494,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10297711941848,35.205973725517566,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10298328037383,35.206079681088625,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10298944132918,35.20618563665968,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10299560228453,35.206291592230755,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10300176323987,35.206397547801814,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.103007924195225,35.20650350337288,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10301408515057,35.206609458943944,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10302024610591,35.206715414515,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.103026407061265,35.20682137008607,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10303256801661,35.20692732565713,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10303872897196,35.20703328122819,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10303872897196,35.20703328122819,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.103025682242986,35.20714090426553,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10301263551401,35.20724852730286,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10299958878504,35.20735615034019,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10298654205607,35.207463773377526,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102973495327106,35.20757139641486,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102960448598125,35.20767901945219,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10294740186916,35.20778664248953,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102934355140185,35.20789426552686,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10292130841121,35.2080018885642,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102908261682245,35.208109511601535,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10289521495327,35.208217134638865,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.1028821682243,35.208324757676195,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102869121495324,35.20843238071353,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10285607476635,35.20854000375087,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.102843028037384,35.2086476267882,0.0
-</coordinates></Point>
-</Placemark>
-, <name>5</name>
-<TimeStamp><when>0</when></TimeStamp><Point>
-<coordinates>5 32.10282998130841,35.208755249825536,0.0
-</coordinates></Point>
-</Placemark>
-, </LineStyle></Folder>
-, </Document></kml>

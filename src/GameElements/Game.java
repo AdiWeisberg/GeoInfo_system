@@ -13,7 +13,10 @@ import GIS.GIS_layer;
 import GIS.Meta_data;
 import GIS.info;
 import Geom.Geom_element;
-
+/**class Game- Represents a game that contains: a set of fruits and a set of Pacman.
+ *  Has a function to convert the arrays to a CSV file 
+ *  and a function that accepts a CSV file and becomes an arrays of the game.
+ * @author Adi and Naomi */
 public class Game{
 	private ArrayList<GIS_element> fruits;
 	private ArrayList<GIS_element> pacmans;
@@ -25,12 +28,9 @@ public class Game{
 		this.fruits=new ArrayList<GIS_element>(fruits);
 		this.pacmans=new ArrayList<GIS_element>(pacmans);
 	}
-/**
- * Takes a CSV file and turns it into a game
+/** Takes a CSV file and turns it into a game
  * @param paths-STRING array of files we'd like to convert
- * @throws ParseException- if the Conversion does not work. 
- */
-	
+ * @throws ParseException- if the Conversion does not work. */
 	public void  csvToGame(String Path) throws ParseException {
 		ArrayList<GIS_element> newData = new ArrayList<GIS_element>();
 		newData.addAll( new CSVtoJava().convert(Path));
@@ -53,10 +53,8 @@ public class Game{
 	
 		}
 	
-	/**
-	 * Takes a game and converts it to a CSV file
-	 * @return-STRING array of disconnections to CSV folders we created.
-	 */
+	/** Takes a game and converts it to a CSV file
+	 * @return-STRING array of disconnections to CSV folders we created.*/
 	public void GameTocsv( String fileName  ) {
 		
 			new JavaToCSV().writeCsvFile(fileName , this.fruits,this.pacmans);		
@@ -98,13 +96,13 @@ public class Game{
 	public void setPacmans(ArrayList<GIS_element> pacmans) {
 		this.pacmans = pacmans;
 	}
-	public static void main(String[] args) throws ParseException {
+	//public static void main(String[] args) throws ParseException {
 		//ArrayList<String>paths= new ArrayList<String>();
 		//Game g= new Game();
 	//	paths.add("game_1543693911932_b.csv");
     // g.csvToGame(paths) ;
      // g.GameTocsv("new.csv",g.fruits,g.pacmans);
-	}
+//	}
 
 
 
