@@ -34,15 +34,15 @@ Geographic information system that collect information from CSV files and conver
 -interface: Meta_data:
 -info:Row information
 -System_data: layer or layers information.
-6.GUI:
+6. GUI:
 -MyFranme
 -ThreadPacman: implements Runnable, a object of one Thread PACMAN- produces a simulation of the walkmanws walk througt a fruit path.
-7.Test:
+7. Test:
 -MyCoordsTest
 -ConvertFactoryTest
 -MapTest
 -TestShortestPathAlgo
-6.GeoInfo_system_Diagram
+6. GeoInfo_system_Diagram
 
 # Get_Started:
 In order to start you may want to open the class MyFrame and run, it will open the map gui, you can choose from the following option:
